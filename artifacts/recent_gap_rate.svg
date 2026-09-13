@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="470" viewBox="0 0 900 470">
+<rect width="100%" height="100%" fill="white"/>
+<text x="30" y="35" font-family="sans-serif" font-size="24" font-weight="bold">Share of realized headways classified as long gaps</text>
+<text x="30" y="58" font-family="sans-serif" font-size="14" fill="#555">MBTA LAMP service dates 2026-09-06–2026-09-12 · gap = observed headway &gt; 1.5× scheduled</text>
+<text x="168" y="98" text-anchor="end" font-family="sans-serif" font-size="16">Green-D</text>
+<rect x="180" y="75" width="640.0" height="34" rx="3" fill="#00843D"/>
+<text x="830.0" y="98" font-family="sans-serif" font-size="15">17.5%</text>
+<text x="168" y="147" text-anchor="end" font-family="sans-serif" font-size="16">Green-B</text>
+<rect x="180" y="124" width="636.3" height="34" rx="3" fill="#00843D"/>
+<text x="826.3" y="147" font-family="sans-serif" font-size="15">17.4%</text>
+<text x="168" y="196" text-anchor="end" font-family="sans-serif" font-size="16">Green-E</text>
+<rect x="180" y="173" width="618.1" height="34" rx="3" fill="#00843D"/>
+<text x="808.1" y="196" font-family="sans-serif" font-size="15">16.9%</text>
+<text x="168" y="245" text-anchor="end" font-family="sans-serif" font-size="16">Green-C</text>
+<rect x="180" y="222" width="519.3" height="34" rx="3" fill="#00843D"/>
+<text x="709.3" y="245" font-family="sans-serif" font-size="15">14.2%</text>
+<text x="168" y="294" text-anchor="end" font-family="sans-serif" font-size="16">Red</text>
+<rect x="180" y="271" width="340.1" height="34" rx="3" fill="#DA291C"/>
+<text x="530.1" y="294" font-family="sans-serif" font-size="15">9.3%</text>
+<text x="168" y="343" text-anchor="end" font-family="sans-serif" font-size="16">Blue</text>
+<rect x="180" y="320" width="263.3" height="34" rx="3" fill="#003DA5"/>
+<text x="453.3" y="343" font-family="sans-serif" font-size="15">7.2%</text>
+<text x="168" y="392" text-anchor="end" font-family="sans-serif" font-size="16">Orange</text>
+<rect x="180" y="369" width="230.4" height="34" rx="3" fill="#ED8B00"/>
+<text x="420.4" y="392" font-family="sans-serif" font-size="15">6.3%</text>
+</svg>

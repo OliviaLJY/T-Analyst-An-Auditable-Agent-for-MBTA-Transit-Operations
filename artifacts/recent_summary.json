@@ -1,0 +1,76 @@
+{
+  "service_dates": [
+    "2026-09-06",
+    "2026-09-07",
+    "2026-09-08",
+    "2026-09-09",
+    "2026-09-10",
+    "2026-09-11",
+    "2026-09-12"
+  ],
+  "routes": [
+    {
+      "route_id": "Green-D",
+      "observations": 38840,
+      "median_headway_ratio": 1.041,
+      "p90_headway_ratio": 1.738,
+      "gap_rate": 0.175,
+      "bunching_rate": 0.108,
+      "median_travel_time_excess_seconds": -54.0
+    },
+    {
+      "route_id": "Green-B",
+      "observations": 34501,
+      "median_headway_ratio": 1.052,
+      "p90_headway_ratio": 1.717,
+      "gap_rate": 0.174,
+      "bunching_rate": 0.095,
+      "median_travel_time_excess_seconds": -59.0
+    },
+    {
+      "route_id": "Green-E",
+      "observations": 38132,
+      "median_headway_ratio": 1.033,
+      "p90_headway_ratio": 1.74,
+      "gap_rate": 0.169,
+      "bunching_rate": 0.107,
+      "median_travel_time_excess_seconds": -56.0
+    },
+    {
+      "route_id": "Green-C",
+      "observations": 30291,
+      "median_headway_ratio": 1.01,
+      "p90_headway_ratio": 1.638,
+      "gap_rate": 0.142,
+      "bunching_rate": 0.095,
+      "median_travel_time_excess_seconds": -46.0
+    },
+    {
+      "route_id": "Red",
+      "observations": 46511,
+      "median_headway_ratio": 0.986,
+      "p90_headway_ratio": 1.476,
+      "gap_rate": 0.093,
+      "bunching_rate": 0.051,
+      "median_travel_time_excess_seconds": -50.0
+    },
+    {
+      "route_id": "Blue",
+      "observations": 27174,
+      "median_headway_ratio": 1.003,
+      "p90_headway_ratio": 1.379,
+      "gap_rate": 0.072,
+      "bunching_rate": 0.02,
+      "median_travel_time_excess_seconds": -34.0
+    },
+    {
+      "route_id": "Orange",
+      "observations": 40651,
+      "median_headway_ratio": 0.987,
+      "p90_headway_ratio": 1.373,
+      "gap_rate": 0.063,
+      "bunching_rate": 0.048,
+      "median_travel_time_excess_seconds": -45.0
+    }
+  ]
+}
