@@ -44,6 +44,9 @@ Questions the artifact is designed to answer include:
 - What is happening on the Orange Line right now?
 - How does the app decide that a gap is unusually long?
 
+A short project deck and speaking notes are available in
+[presentation/](presentation/).
+
 ## Method
 
 The historical data has one row for each observed trip-stop pair. For every row
