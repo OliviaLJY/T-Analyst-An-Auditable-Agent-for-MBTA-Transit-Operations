@@ -136,11 +136,29 @@ Markdown results under `evaluation/`. To evaluate no-key behavior instead:
 python evaluate_agent.py --force-fallback
 ```
 
-The committed [fallback baseline](evaluation/results-fallback.md) selects the
-expected tools for 15/15 questions and returns valid final citations for 15/15.
-All 15 rows correctly report that fallback was used. The fallback run therefore
-has zero full-agent passes, because a full pass requires correct tools, valid
-citations, and no fallback.
+In the first GPT-5.5 run, required evidence citations were valid for 15/15
+questions and no fallback was triggered, but strict tool selection was correct
+for only 9/15. The model usually selected the right primary tool and then added
+an unnecessary `metric_definition` or live-status call. I revised the planner
+prompt to require the smallest sufficient plan and to reserve live and
+definition tools for questions that explicitly ask for them.
+
+The second [GPT-5.5 evaluation](evaluation/results-gpt-5.5.md) achieved:
+
+- correct tool selection: 15/15;
+- valid final citations: 15/15;
+- fallbacks triggered: 0/15;
+- end-to-end pass: 15/15.
+
+This is a small development evaluation, not a held-out benchmark: I used the
+first run's failures to improve the prompt, then reran the same questions. Its
+value is as a repeatable regression check and a concrete record of what the
+current agent does.
+
+The committed [fallback baseline](evaluation/results-fallback.md) also selects
+the expected tools for 15/15 questions and returns valid citations for 15/15.
+All rows correctly report that fallback was used, so the fallback run has zero
+full-agent passes by design.
 
 ## Data and resources
 

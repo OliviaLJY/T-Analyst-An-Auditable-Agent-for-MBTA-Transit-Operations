@@ -242,6 +242,17 @@ Allowed tools:
 - station_headways(station: string, line?: Red|Orange|Blue|Green): realized station headways
 - live_line_status(line?: Red|Orange|Blue|Green): current alerts, vehicles, predictions
 - metric_definition(metric?: string): methodology
+Choose the smallest sufficient plan:
+- Use network_reliability for recent or historical route/line performance.
+- Use station_headways for a historical question about a named station.
+- Use live_line_status only when the user explicitly asks about now, current, live,
+  alerts/notices, vehicles, or predictions.
+- Use metric_definition only when the user asks what a metric means or how it is
+  calculated. Do not add it merely because another tool returns that metric.
+- If the user asks about multiple metric definitions, make one metric_definition
+  call with no metric argument so it returns the full dictionary.
+- Use two tools only when the question explicitly asks to compare live and recent
+  service. Do not add tools for optional context.
 Use 1-3 calls. Never invent another tool or parameter.
 Schema:
 {{"interpreted_question":"...", "calls":[{{"name":"...", "arguments":{{}}, "reason":"..."}}]}}
