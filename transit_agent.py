@@ -9,6 +9,7 @@ from dataclasses import dataclass
 from typing import Any, Callable
 
 import pandas as pd
+from dotenv import load_dotenv
 from openai import OpenAI
 from pydantic import BaseModel, Field, ValidationError
 
@@ -18,6 +19,8 @@ from transit_data import (
     network_reliability,
     station_headways,
 )
+
+load_dotenv()
 
 PARLEY_BASE_URL = "https://parley.api.mit.edu/v1"
 TOOL_ARGUMENTS = {
@@ -47,6 +50,9 @@ class AgentResult:
     evidence: list[dict[str, Any]]
     model: str
     used_llm: bool
+    citation_valid: bool
+    fallback_triggered: bool
+    fallback_reason: str | None
 
 
 class TransitAnalyst:
@@ -118,12 +124,33 @@ class TransitAnalyst:
             "green": "Green",
             "绿线": "Green",
         }
-        line = next((value for key, value in aliases.items() if key in lower), None)
-        if any(
+        line = next(
+            (
+                value
+                for key, value in aliases.items()
+                if (
+                    key in lower
+                    if not key.isascii()
+                    else re.search(rf"\b{re.escape(key)}\b", lower)
+                )
+            ),
+            None,
+        )
+        station_aliases = {
+            "harvard": "Harvard",
+            "kendall/mit": "Kendall/MIT",
+            "kendall": "Kendall/MIT",
+            "state": "State",
+        }
+        station = next(
+            (value for key, value in station_aliases.items() if key in lower), None
+        )
+        asks_live = any(
             token in lower
             for token in (
                 "now",
                 "live",
+                "current",
                 "alert",
                 "notice",
                 "happening",
@@ -132,7 +159,54 @@ class TransitAnalyst:
                 "警报",
                 "通知",
             )
-        ):
+        )
+        asks_method = any(
+            token in lower
+            for token in (
+                "define",
+                "metric",
+                "mean",
+                "decide",
+                "difference",
+                "how do you",
+                "怎么算",
+                "定义",
+                "指标",
+            )
+        )
+        asks_history = any(
+            token in lower
+            for token in (
+                "recent",
+                "reliability",
+                "headway",
+                "spacing",
+                "历史",
+                "最近",
+            )
+        )
+        if station:
+            calls = [
+                ToolCall(
+                    name="station_headways",
+                    arguments={"station": station, "line": line},
+                    reason="The question asks about realized headways at a station.",
+                )
+            ]
+        elif asks_live and asks_history:
+            calls = [
+                ToolCall(
+                    name="live_line_status",
+                    arguments={"line": line},
+                    reason="Use the current service snapshot.",
+                ),
+                ToolCall(
+                    name="network_reliability",
+                    arguments={"line": line},
+                    reason="Compare with recently realized operations.",
+                ),
+            ]
+        elif asks_live:
             calls = [
                 ToolCall(
                     name="live_line_status",
@@ -140,19 +214,7 @@ class TransitAnalyst:
                     reason="The question asks about current service.",
                 )
             ]
-        elif any(
-            token in lower
-            for token in (
-                "define",
-                "metric",
-                "mean",
-                "decide",
-                "how do you",
-                "定义",
-                "指标",
-                "怎么算",
-            )
-        ):
+        elif asks_method:
             calls = [
                 ToolCall(
                     name="metric_definition",
@@ -261,11 +323,18 @@ Question: {question}"""
                 )
         return "\n\n".join(parts)
 
+    @staticmethod
+    def _citations_valid(answer: str, evidence: list[dict[str, Any]]) -> bool:
+        valid_ids = {item["evidence_id"] for item in evidence}
+        cited_ids = set(re.findall(r"\[(E\d+)\]", answer))
+        return bool(cited_ids) and cited_ids.issubset(valid_ids)
+
     def _synthesize(
         self, question: str, plan: AgentPlan, evidence: list[dict[str, Any]]
-    ) -> str:
+    ) -> tuple[str, bool, str | None]:
         if not self.client:
-            return self._fallback_answer(evidence)
+            answer = self._fallback_answer(evidence)
+            return answer, self._citations_valid(answer, evidence), "no_api_key"
         model = self._resolve_model()
         prompt = f"""Answer an MBTA transit analysis question from evidence only.
 Lead with the finding, explain operational meaning, and state limitations.
@@ -279,20 +348,28 @@ Evidence: {json.dumps(evidence, ensure_ascii=False, default=str)}"""
             messages=[{"role": "user", "content": prompt}],
         )
         answer = response.choices[0].message.content or ""
-        valid_ids = {item["evidence_id"] for item in evidence}
-        cited_ids = set(re.findall(r"\[(E\d+)\]", answer))
-        if not cited_ids or not cited_ids.issubset(valid_ids):
-            return self._fallback_answer(evidence)
-        return answer
+        if not self._citations_valid(answer, evidence):
+            fallback = self._fallback_answer(evidence)
+            return (
+                fallback,
+                self._citations_valid(fallback, evidence),
+                "citation_validation_failed",
+            )
+        return answer, True, None
 
     def ask(self, question: str) -> AgentResult:
         plan = self._make_plan(question)
         evidence = self._run_tools(plan)
-        answer = self._synthesize(question, plan, evidence)
+        answer, citation_valid, fallback_reason = self._synthesize(
+            question, plan, evidence
+        )
         return AgentResult(
             answer=answer,
             plan=plan,
             evidence=evidence,
             model=self._resolve_model() if self.client else "deterministic-fallback",
             used_llm=bool(self.client),
+            citation_valid=citation_valid,
+            fallback_triggered=fallback_reason is not None,
+            fallback_reason=fallback_reason,
         )

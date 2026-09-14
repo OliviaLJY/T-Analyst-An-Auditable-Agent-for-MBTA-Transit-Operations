@@ -95,7 +95,8 @@ The submitted version was tested with Python 3.9.
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
-export TRANSIT_LLM_API_KEY="your Parley key"
+cp .env.example .env
+# Open .env and add the Parley key. .env is ignored by Git.
 python check_parley.py
 python prepare_data.py
 streamlit run app.py
@@ -111,6 +112,35 @@ Run tests with:
 ```bash
 pytest -q
 ```
+
+## Agent evaluation
+
+The repository includes a fixed set of 15 questions covering network and line
+reliability, station headways, live status, metric definitions, a multi-tool
+comparison, and two Chinese questions. The evaluation checks three behaviors:
+
+- whether the planner selected the expected tool and required arguments;
+- whether the final answer cites only evidence IDs from the same run;
+- whether deterministic fallback behavior was triggered.
+
+Run the GPT-5.5 evaluation from a shell with the Parley key:
+
+```bash
+python evaluate_agent.py
+```
+
+This makes 15 planning calls and 15 answer calls, then writes CSV, JSON, and
+Markdown results under `evaluation/`. To evaluate no-key behavior instead:
+
+```bash
+python evaluate_agent.py --force-fallback
+```
+
+The committed [fallback baseline](evaluation/results-fallback.md) selects the
+expected tools for 15/15 questions and returns valid final citations for 15/15.
+All 15 rows correctly report that fallback was used. The fallback run therefore
+has zero full-agent passes, because a full pass requires correct tools, valid
+citations, and no fallback.
 
 ## Data and resources
 

@@ -1,0 +1,132 @@
+[
+  {
+    "id": "hist-network-ranking",
+    "question": "Which subway route had the highest long-gap rate in the recent data?",
+    "expected_calls": [
+      {"name": "network_reliability", "arguments": {}}
+    ],
+    "category": "historical network"
+  },
+  {
+    "id": "hist-red",
+    "question": "How has the Red Line been running recently?",
+    "expected_calls": [
+      {"name": "network_reliability", "arguments": {"line": "Red"}}
+    ],
+    "category": "historical line"
+  },
+  {
+    "id": "hist-green",
+    "question": "Which Green Line branch had the most uneven train spacing?",
+    "expected_calls": [
+      {"name": "network_reliability", "arguments": {"line": "Green"}}
+    ],
+    "category": "historical line"
+  },
+  {
+    "id": "hist-blue",
+    "question": "Summarize recent headway reliability on the Blue Line.",
+    "expected_calls": [
+      {"name": "network_reliability", "arguments": {"line": "Blue"}}
+    ],
+    "category": "historical line"
+  },
+  {
+    "id": "live-orange",
+    "question": "What is happening on the Orange Line right now?",
+    "expected_calls": [
+      {"name": "live_line_status", "arguments": {"line": "Orange"}}
+    ],
+    "category": "live line"
+  },
+  {
+    "id": "live-blue",
+    "question": "Show me the current Blue Line vehicles, notices, and prediction gaps.",
+    "expected_calls": [
+      {"name": "live_line_status", "arguments": {"line": "Blue"}}
+    ],
+    "category": "live line"
+  },
+  {
+    "id": "live-network",
+    "question": "Are there any subway service notices right now?",
+    "expected_calls": [
+      {"name": "live_line_status", "arguments": {}}
+    ],
+    "category": "live network"
+  },
+  {
+    "id": "station-harvard",
+    "question": "How were realized headways at Harvard on the Red Line?",
+    "expected_calls": [
+      {
+        "name": "station_headways",
+        "arguments": {"station": "Harvard", "line": "Red"}
+      }
+    ],
+    "category": "historical station"
+  },
+  {
+    "id": "station-kendall",
+    "question": "Summarize recent train spacing at Kendall/MIT on the Red Line.",
+    "expected_calls": [
+      {
+        "name": "station_headways",
+        "arguments": {"station": "Kendall/MIT", "line": "Red"}
+      }
+    ],
+    "category": "historical station"
+  },
+  {
+    "id": "station-state",
+    "question": "Were there many long gaps at State on the Orange Line?",
+    "expected_calls": [
+      {
+        "name": "station_headways",
+        "arguments": {"station": "State", "line": "Orange"}
+      }
+    ],
+    "category": "historical station"
+  },
+  {
+    "id": "define-gap",
+    "question": "How does T-Analyst decide that a gap is unusually long?",
+    "expected_calls": [
+      {"name": "metric_definition", "arguments": {}}
+    ],
+    "category": "methodology"
+  },
+  {
+    "id": "define-prediction",
+    "question": "What is the difference between a prediction gap and a realized headway?",
+    "expected_calls": [
+      {"name": "metric_definition", "arguments": {}}
+    ],
+    "category": "methodology"
+  },
+  {
+    "id": "compare-orange",
+    "question": "Compare current Orange Line conditions with its recent reliability.",
+    "expected_calls": [
+      {"name": "live_line_status", "arguments": {"line": "Orange"}},
+      {"name": "network_reliability", "arguments": {"line": "Orange"}}
+    ],
+    "category": "multi-tool"
+  },
+  {
+    "id": "zh-live-red",
+    "question": "红线现在运行情况怎么样？有没有服务通知？",
+    "expected_calls": [
+      {"name": "live_line_status", "arguments": {"line": "Red"}}
+    ],
+    "category": "multilingual"
+  },
+  {
+    "id": "zh-method",
+    "question": "系统是怎么算 long gap 和 bunching 的？",
+    "expected_calls": [
+      {"name": "metric_definition", "arguments": {}}
+    ],
+    "category": "multilingual"
+  }
+]

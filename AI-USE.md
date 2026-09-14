@@ -18,6 +18,8 @@ The coding agent helped with:
 - diagnosing a pandas dtype issue that appeared on the real LAMP files;
 - revising the interface after I asked for a clearer and more natural user
   experience;
+- setting up a fixed-question evaluation for tool selection, evidence
+  citations, and fallback behavior;
 - drafting and editing the repository documentation.
 
 I reviewed the running app between iterations and directed changes to the

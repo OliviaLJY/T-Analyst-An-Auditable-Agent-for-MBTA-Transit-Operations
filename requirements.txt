@@ -6,4 +6,5 @@ urllib3>=1.26,<2
 pyarrow>=17,<22
 openai>=1.50,<3
 pydantic>=2.8,<3
+python-dotenv>=1.0,<2
 pytest>=8.3,<10

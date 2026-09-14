@@ -1,0 +1,485 @@
+{
+  "run_at": "2026-09-14T15:06:25.503320+00:00",
+  "mode": "fallback baseline",
+  "model": "deterministic-fallback",
+  "summary": {
+    "total": 15,
+    "tool_selection_correct": 15,
+    "tool_selection_rate": 1.0,
+    "citation_valid": 15,
+    "citation_valid_rate": 1.0,
+    "fallback_triggered": 15,
+    "passed": 0,
+    "errors": 0
+  },
+  "results": [
+    {
+      "id": "hist-network-ranking",
+      "category": "historical network",
+      "question": "Which subway route had the highest long-gap rate in the recent data?",
+      "expected_calls": "network_reliability({})",
+      "selected_calls": "network_reliability({\"line\": null})",
+      "expected_calls_raw": [
+        {
+          "name": "network_reliability",
+          "arguments": {}
+        }
+      ],
+      "selected_calls_raw": [
+        {
+          "name": "network_reliability",
+          "arguments": {
+            "line": null
+          },
+          "reason": "Use realized historical operations for a reliability question."
+        }
+      ],
+      "tool_selection_correct": true,
+      "citation_valid": true,
+      "fallback_triggered": true,
+      "fallback_reason": "no_api_key",
+      "passed": false,
+      "error": "",
+      "answer": "Parley is unavailable, so this is a deterministic evidence summary.\n\n[E1] Green-D: gap rate 0.176, based on 38831 observations."
+    },
+    {
+      "id": "hist-red",
+      "category": "historical line",
+      "question": "How has the Red Line been running recently?",
+      "expected_calls": "network_reliability({\"line\": \"Red\"})",
+      "selected_calls": "network_reliability({\"line\": \"Red\"})",
+      "expected_calls_raw": [
+        {
+          "name": "network_reliability",
+          "arguments": {
+            "line": "Red"
+          }
+        }
+      ],
+      "selected_calls_raw": [
+        {
+          "name": "network_reliability",
+          "arguments": {
+            "line": "Red"
+          },
+          "reason": "Use realized historical operations for a reliability question."
+        }
+      ],
+      "tool_selection_correct": true,
+      "citation_valid": true,
+      "fallback_triggered": true,
+      "fallback_reason": "no_api_key",
+      "passed": false,
+      "error": "",
+      "answer": "Parley is unavailable, so this is a deterministic evidence summary.\n\n[E1] Red: gap rate 0.094, based on 46555 observations."
+    },
+    {
+      "id": "hist-green",
+      "category": "historical line",
+      "question": "Which Green Line branch had the most uneven train spacing?",
+      "expected_calls": "network_reliability({\"line\": \"Green\"})",
+      "selected_calls": "network_reliability({\"line\": \"Green\"})",
+      "expected_calls_raw": [
+        {
+          "name": "network_reliability",
+          "arguments": {
+            "line": "Green"
+          }
+        }
+      ],
+      "selected_calls_raw": [
+        {
+          "name": "network_reliability",
+          "arguments": {
+            "line": "Green"
+          },
+          "reason": "Use realized historical operations for a reliability question."
+        }
+      ],
+      "tool_selection_correct": true,
+      "citation_valid": true,
+      "fallback_triggered": true,
+      "fallback_reason": "no_api_key",
+      "passed": false,
+      "error": "",
+      "answer": "Parley is unavailable, so this is a deterministic evidence summary.\n\n[E1] Green-D: gap rate 0.176, based on 38831 observations."
+    },
+    {
+      "id": "hist-blue",
+      "category": "historical line",
+      "question": "Summarize recent headway reliability on the Blue Line.",
+      "expected_calls": "network_reliability({\"line\": \"Blue\"})",
+      "selected_calls": "network_reliability({\"line\": \"Blue\"})",
+      "expected_calls_raw": [
+        {
+          "name": "network_reliability",
+          "arguments": {
+            "line": "Blue"
+          }
+        }
+      ],
+      "selected_calls_raw": [
+        {
+          "name": "network_reliability",
+          "arguments": {
+            "line": "Blue"
+          },
+          "reason": "Use realized historical operations for a reliability question."
+        }
+      ],
+      "tool_selection_correct": true,
+      "citation_valid": true,
+      "fallback_triggered": true,
+      "fallback_reason": "no_api_key",
+      "passed": false,
+      "error": "",
+      "answer": "Parley is unavailable, so this is a deterministic evidence summary.\n\n[E1] Blue: gap rate 0.069, based on 27174 observations."
+    },
+    {
+      "id": "live-orange",
+      "category": "live line",
+      "question": "What is happening on the Orange Line right now?",
+      "expected_calls": "live_line_status({\"line\": \"Orange\"})",
+      "selected_calls": "live_line_status({\"line\": \"Orange\"})",
+      "expected_calls_raw": [
+        {
+          "name": "live_line_status",
+          "arguments": {
+            "line": "Orange"
+          }
+        }
+      ],
+      "selected_calls_raw": [
+        {
+          "name": "live_line_status",
+          "arguments": {
+            "line": "Orange"
+          },
+          "reason": "The question asks about current service."
+        }
+      ],
+      "tool_selection_correct": true,
+      "citation_valid": true,
+      "fallback_triggered": true,
+      "fallback_reason": "no_api_key",
+      "passed": false,
+      "error": "",
+      "answer": "Parley is unavailable, so this is a deterministic evidence summary.\n\n[E1] {\"line\": \"Orange\", \"as_of\": \"2026-09-14T15:06:24.102098+00:00\", \"vehicle_count\": 10, \"active_alert_count\": 3, \"alerts\": [{\"alert_id\": \"1001814\", \"effect\": \"STATION_ISSUE\", \"header\": \"The platform at Jackson Square is undergoing renovations to improve safety and accessibility. Sections of the platform are unlevel, which may make it difficult for some riders to board and exit trains.\", \"routes\": [\"Orange\"], \"updated_at\": \"2026-07-21T20:49:43-04:00\"}, {\"alert_id\": \"1001861\", \"effect\": \"STATION_ISSUE\", \"header\": \"The stairway connecting the Jackson Square lobby and the south end of the platform is closed until winter 2026. Use the stairway at the north end of the platform. This closure is for th"
+    },
+    {
+      "id": "live-blue",
+      "category": "live line",
+      "question": "Show me the current Blue Line vehicles, notices, and prediction gaps.",
+      "expected_calls": "live_line_status({\"line\": \"Blue\"})",
+      "selected_calls": "live_line_status({\"line\": \"Blue\"})",
+      "expected_calls_raw": [
+        {
+          "name": "live_line_status",
+          "arguments": {
+            "line": "Blue"
+          }
+        }
+      ],
+      "selected_calls_raw": [
+        {
+          "name": "live_line_status",
+          "arguments": {
+            "line": "Blue"
+          },
+          "reason": "The question asks about current service."
+        }
+      ],
+      "tool_selection_correct": true,
+      "citation_valid": true,
+      "fallback_triggered": true,
+      "fallback_reason": "no_api_key",
+      "passed": false,
+      "error": "",
+      "answer": "Parley is unavailable, so this is a deterministic evidence summary.\n\n[E1] {\"line\": \"Blue\", \"as_of\": \"2026-09-14T15:06:24.102098+00:00\", \"vehicle_count\": 8, \"active_alert_count\": 1, \"alerts\": [{\"alert_id\": \"1028255\", \"effect\": \"DELAY\", \"header\": \"Blue Line: All trains will operate on the outbound/eastbound track between Wonderland and Revere Beach the weekend of September 26 – 27, for switch work. \", \"routes\": [\"Blue\"], \"updated_at\": \"2026-08-19T08:42:11-04:00\"}], \"largest_prediction_gaps\": [{\"route_id\": \"Blue\", \"stop_name\": \"Wonderland\", \"direction_id\": 1, \"gap_minutes\": 10.5}, {\"route_id\": \"Blue\", \"stop_name\": \"Wonderland\", \"direction_id\": 0, \"gap_minutes\": 10.5}, {\"route_id\": \"Blue\", \"stop_name\": \"Revere Beach\", \"direction_id\": 0, \"gap_minutes\": 10.5}, {\"route_i"
+    },
+    {
+      "id": "live-network",
+      "category": "live network",
+      "question": "Are there any subway service notices right now?",
+      "expected_calls": "live_line_status({})",
+      "selected_calls": "live_line_status({\"line\": null})",
+      "expected_calls_raw": [
+        {
+          "name": "live_line_status",
+          "arguments": {}
+        }
+      ],
+      "selected_calls_raw": [
+        {
+          "name": "live_line_status",
+          "arguments": {
+            "line": null
+          },
+          "reason": "The question asks about current service."
+        }
+      ],
+      "tool_selection_correct": true,
+      "citation_valid": true,
+      "fallback_triggered": true,
+      "fallback_reason": "no_api_key",
+      "passed": false,
+      "error": "",
+      "answer": "Parley is unavailable, so this is a deterministic evidence summary.\n\n[E1] {\"line\": \"Network\", \"as_of\": \"2026-09-14T15:06:24.102098+00:00\", \"vehicle_count\": 98, \"active_alert_count\": 9, \"alerts\": [{\"alert_id\": \"1001814\", \"effect\": \"STATION_ISSUE\", \"header\": \"The platform at Jackson Square is undergoing renovations to improve safety and accessibility. Sections of the platform are unlevel, which may make it difficult for some riders to board and exit trains.\", \"routes\": [\"Orange\"], \"updated_at\": \"2026-07-21T20:49:43-04:00\"}, {\"alert_id\": \"1001861\", \"effect\": \"STATION_ISSUE\", \"header\": \"The stairway connecting the Jackson Square lobby and the south end of the platform is closed until winter 2026. Use the stairway at the north end of the platform. This closure is for t"
+    },
+    {
+      "id": "station-harvard",
+      "category": "historical station",
+      "question": "How were realized headways at Harvard on the Red Line?",
+      "expected_calls": "station_headways({\"station\": \"Harvard\", \"line\": \"Red\"})",
+      "selected_calls": "station_headways({\"station\": \"Harvard\", \"line\": \"Red\"})",
+      "expected_calls_raw": [
+        {
+          "name": "station_headways",
+          "arguments": {
+            "station": "Harvard",
+            "line": "Red"
+          }
+        }
+      ],
+      "selected_calls_raw": [
+        {
+          "name": "station_headways",
+          "arguments": {
+            "station": "Harvard",
+            "line": "Red"
+          },
+          "reason": "The question asks about realized headways at a station."
+        }
+      ],
+      "tool_selection_correct": true,
+      "citation_valid": true,
+      "fallback_triggered": true,
+      "fallback_reason": "no_api_key",
+      "passed": false,
+      "error": "",
+      "answer": "Parley is unavailable, so this is a deterministic evidence summary.\n\n[E1] {\"station\": \"Harvard\", \"error\": \"No matching station in the selected data.\"}"
+    },
+    {
+      "id": "station-kendall",
+      "category": "historical station",
+      "question": "Summarize recent train spacing at Kendall/MIT on the Red Line.",
+      "expected_calls": "station_headways({\"station\": \"Kendall/MIT\", \"line\": \"Red\"})",
+      "selected_calls": "station_headways({\"station\": \"Kendall/MIT\", \"line\": \"Red\"})",
+      "expected_calls_raw": [
+        {
+          "name": "station_headways",
+          "arguments": {
+            "station": "Kendall/MIT",
+            "line": "Red"
+          }
+        }
+      ],
+      "selected_calls_raw": [
+        {
+          "name": "station_headways",
+          "arguments": {
+            "station": "Kendall/MIT",
+            "line": "Red"
+          },
+          "reason": "The question asks about realized headways at a station."
+        }
+      ],
+      "tool_selection_correct": true,
+      "citation_valid": true,
+      "fallback_triggered": true,
+      "fallback_reason": "no_api_key",
+      "passed": false,
+      "error": "",
+      "answer": "Parley is unavailable, so this is a deterministic evidence summary.\n\n[E1] {\"station\": \"Kendall/MIT\", \"error\": \"No matching station in the selected data.\"}"
+    },
+    {
+      "id": "station-state",
+      "category": "historical station",
+      "question": "Were there many long gaps at State on the Orange Line?",
+      "expected_calls": "station_headways({\"station\": \"State\", \"line\": \"Orange\"})",
+      "selected_calls": "station_headways({\"station\": \"State\", \"line\": \"Orange\"})",
+      "expected_calls_raw": [
+        {
+          "name": "station_headways",
+          "arguments": {
+            "station": "State",
+            "line": "Orange"
+          }
+        }
+      ],
+      "selected_calls_raw": [
+        {
+          "name": "station_headways",
+          "arguments": {
+            "station": "State",
+            "line": "Orange"
+          },
+          "reason": "The question asks about realized headways at a station."
+        }
+      ],
+      "tool_selection_correct": true,
+      "citation_valid": true,
+      "fallback_triggered": true,
+      "fallback_reason": "no_api_key",
+      "passed": false,
+      "error": "",
+      "answer": "Parley is unavailable, so this is a deterministic evidence summary.\n\n[E1] {\"station\": \"State\", \"matched_values\": [\"place-state\"], \"observations\": 2597, \"median_headway_minutes\": 6.18, \"p90_headway_minutes\": 9.0, \"gap_rate\": 0.062, \"bunching_rate\": 0.04}"
+    },
+    {
+      "id": "define-gap",
+      "category": "methodology",
+      "question": "How does T-Analyst decide that a gap is unusually long?",
+      "expected_calls": "metric_definition({})",
+      "selected_calls": "metric_definition({})",
+      "expected_calls_raw": [
+        {
+          "name": "metric_definition",
+          "arguments": {}
+        }
+      ],
+      "selected_calls_raw": [
+        {
+          "name": "metric_definition",
+          "arguments": {},
+          "reason": "The question asks how metrics are defined."
+        }
+      ],
+      "tool_selection_correct": true,
+      "citation_valid": true,
+      "fallback_triggered": true,
+      "fallback_reason": "no_api_key",
+      "passed": false,
+      "error": "",
+      "answer": "Parley is unavailable, so this is a deterministic evidence summary.\n\n[E1] {\"headway_ratio\": \"Observed departure headway divided by scheduled headway.\", \"gap_rate\": \"Share of observed headways greater than 1.5× the scheduled headway.\", \"bunching_rate\": \"Share of observed headways below 0.5× the scheduled headway.\", \"travel_time_excess\": \"Observed inter-station travel time minus scheduled travel time.\", \"prediction_gap\": \"Minutes between consecutive future predictions at one stop and direction. This is not a realized headway.\"}"
+    },
+    {
+      "id": "define-prediction",
+      "category": "methodology",
+      "question": "What is the difference between a prediction gap and a realized headway?",
+      "expected_calls": "metric_definition({})",
+      "selected_calls": "metric_definition({})",
+      "expected_calls_raw": [
+        {
+          "name": "metric_definition",
+          "arguments": {}
+        }
+      ],
+      "selected_calls_raw": [
+        {
+          "name": "metric_definition",
+          "arguments": {},
+          "reason": "The question asks how metrics are defined."
+        }
+      ],
+      "tool_selection_correct": true,
+      "citation_valid": true,
+      "fallback_triggered": true,
+      "fallback_reason": "no_api_key",
+      "passed": false,
+      "error": "",
+      "answer": "Parley is unavailable, so this is a deterministic evidence summary.\n\n[E1] {\"headway_ratio\": \"Observed departure headway divided by scheduled headway.\", \"gap_rate\": \"Share of observed headways greater than 1.5× the scheduled headway.\", \"bunching_rate\": \"Share of observed headways below 0.5× the scheduled headway.\", \"travel_time_excess\": \"Observed inter-station travel time minus scheduled travel time.\", \"prediction_gap\": \"Minutes between consecutive future predictions at one stop and direction. This is not a realized headway.\"}"
+    },
+    {
+      "id": "compare-orange",
+      "category": "multi-tool",
+      "question": "Compare current Orange Line conditions with its recent reliability.",
+      "expected_calls": "live_line_status({\"line\": \"Orange\"}); network_reliability({\"line\": \"Orange\"})",
+      "selected_calls": "live_line_status({\"line\": \"Orange\"}); network_reliability({\"line\": \"Orange\"})",
+      "expected_calls_raw": [
+        {
+          "name": "live_line_status",
+          "arguments": {
+            "line": "Orange"
+          }
+        },
+        {
+          "name": "network_reliability",
+          "arguments": {
+            "line": "Orange"
+          }
+        }
+      ],
+      "selected_calls_raw": [
+        {
+          "name": "live_line_status",
+          "arguments": {
+            "line": "Orange"
+          },
+          "reason": "Use the current service snapshot."
+        },
+        {
+          "name": "network_reliability",
+          "arguments": {
+            "line": "Orange"
+          },
+          "reason": "Compare with recently realized operations."
+        }
+      ],
+      "tool_selection_correct": true,
+      "citation_valid": true,
+      "fallback_triggered": true,
+      "fallback_reason": "no_api_key",
+      "passed": false,
+      "error": "",
+      "answer": "Parley is unavailable, so this is a deterministic evidence summary.\n\n[E1] {\"line\": \"Orange\", \"as_of\": \"2026-09-14T15:06:24.102098+00:00\", \"vehicle_count\": 10, \"active_alert_count\": 3, \"alerts\": [{\"alert_id\": \"1001814\", \"effect\": \"STATION_ISSUE\", \"header\": \"The platform at Jackson Square is undergoing renovations to improve safety and accessibility. Sections of the platform are unlevel, which may make it difficult for some riders to board and exit trains.\", \"routes\": [\"Orange\"], \"updated_at\": \"2026-07-21T20:49:43-04:00\"}, {\"alert_id\": \"1001861\", \"effect\": \"STATION_ISSUE\", \"header\": \"The stairway connecting the Jackson Square lobby and the south end of the platform is closed until winter 2026. Use the stairway at the north end of the platform. This closure is for th\n\n[E2] Orange: gap rate 0.068, based on 38602 observations."
+    },
+    {
+      "id": "zh-live-red",
+      "category": "multilingual",
+      "question": "红线现在运行情况怎么样？有没有服务通知？",
+      "expected_calls": "live_line_status({\"line\": \"Red\"})",
+      "selected_calls": "live_line_status({\"line\": \"Red\"})",
+      "expected_calls_raw": [
+        {
+          "name": "live_line_status",
+          "arguments": {
+            "line": "Red"
+          }
+        }
+      ],
+      "selected_calls_raw": [
+        {
+          "name": "live_line_status",
+          "arguments": {
+            "line": "Red"
+          },
+          "reason": "The question asks about current service."
+        }
+      ],
+      "tool_selection_correct": true,
+      "citation_valid": true,
+      "fallback_triggered": true,
+      "fallback_reason": "no_api_key",
+      "passed": false,
+      "error": "",
+      "answer": "Parley is unavailable, so this is a deterministic evidence summary.\n\n[E1] {\"line\": \"Red\", \"as_of\": \"2026-09-14T15:06:24.102098+00:00\", \"vehicle_count\": 22, \"active_alert_count\": 1, \"alerts\": [{\"alert_id\": \"1028254\", \"effect\": \"SHUTTLE\", \"header\": \"Red Line Ashmont Branch: Critical bridge work will be taking place the weekend of September 19-20. Accessible shuttle buses will replace service between JFK/UMass and Ashmont.\", \"routes\": [\"Red\"], \"updated_at\": \"2026-09-14T11:00:22-04:00\"}], \"largest_prediction_gaps\": [{\"route_id\": \"Red\", \"stop_name\": \"JFK/UMass\", \"direction_id\": 0, \"gap_minutes\": 15.6}, {\"route_id\": \"Red\", \"stop_name\": \"North Quincy\", \"direction_id\": 0, \"gap_minutes\": 15.6}, {\"route_id\": \"Red\", \"stop_name\": \"Wollaston\", \"direction_id\": 0, \"gap_minutes\":"
+    },
+    {
+      "id": "zh-method",
+      "category": "multilingual",
+      "question": "系统是怎么算 long gap 和 bunching 的？",
+      "expected_calls": "metric_definition({})",
+      "selected_calls": "metric_definition({})",
+      "expected_calls_raw": [
+        {
+          "name": "metric_definition",
+          "arguments": {}
+        }
+      ],
+      "selected_calls_raw": [
+        {
+          "name": "metric_definition",
+          "arguments": {},
+          "reason": "The question asks how metrics are defined."
+        }
+      ],
+      "tool_selection_correct": true,
+      "citation_valid": true,
+      "fallback_triggered": true,
+      "fallback_reason": "no_api_key",
+      "passed": false,
+      "error": "",
+      "answer": "Parley is unavailable, so this is a deterministic evidence summary.\n\n[E1] {\"headway_ratio\": \"Observed departure headway divided by scheduled headway.\", \"gap_rate\": \"Share of observed headways greater than 1.5× the scheduled headway.\", \"bunching_rate\": \"Share of observed headways below 0.5× the scheduled headway.\", \"travel_time_excess\": \"Observed inter-station travel time minus scheduled travel time.\", \"prediction_gap\": \"Minutes between consecutive future predictions at one stop and direction. This is not a realized headway.\"}"
+    }
+  ]
+}

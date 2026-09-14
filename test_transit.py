@@ -2,6 +2,7 @@ from datetime import datetime, timedelta, timezone
 
 import pandas as pd
 
+from evaluate_agent import calls_match
 from transit_agent import TransitAnalyst
 from transit_data import live_line_status, network_reliability, station_headways
 
@@ -88,3 +89,33 @@ def test_agent_without_key_uses_auditable_fallback() -> None:
     assert result.used_llm is False
     assert result.plan.calls[0].name == "live_line_status"
     assert "[E1]" in result.answer
+    assert result.citation_valid is True
+    assert result.fallback_triggered is True
+    assert result.fallback_reason == "no_api_key"
+
+
+def test_citation_validation_rejects_unknown_evidence() -> None:
+    evidence = [{"evidence_id": "E1"}]
+    assert TransitAnalyst._citations_valid("Result [E1].", evidence) is True
+    assert TransitAnalyst._citations_valid("Result [E2].", evidence) is False
+    assert TransitAnalyst._citations_valid("No citation.", evidence) is False
+
+
+def test_eval_call_matching_ignores_order_and_allows_optional_arguments() -> None:
+    expected = [
+        {"name": "live_line_status", "arguments": {"line": "Orange"}},
+        {"name": "network_reliability", "arguments": {"line": "Orange"}},
+    ]
+    selected = [
+        {
+            "name": "network_reliability",
+            "arguments": {"line": "Orange"},
+            "reason": "history",
+        },
+        {
+            "name": "live_line_status",
+            "arguments": {"line": "Orange"},
+            "reason": "now",
+        },
+    ]
+    assert calls_match(expected, selected) is True
