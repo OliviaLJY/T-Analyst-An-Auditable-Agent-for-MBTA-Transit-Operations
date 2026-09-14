@@ -1,6 +1,6 @@
 # Agent Evaluation — fallback baseline
 
-- Run time: `2026-09-14T15:06:25.503320+00:00`
+- Run time: `2026-09-14T15:22:09.547272+00:00`
 - Model: `deterministic-fallback`
 - Questions: 15
 - Correct tool selection: 15/15 (100.0%)
@@ -23,8 +23,8 @@
 | define-gap | methodology | metric_definition | metric_definition | Yes | Yes | Yes | No |
 | define-prediction | methodology | metric_definition | metric_definition | Yes | Yes | Yes | No |
 | compare-orange | multi-tool | live_line_status<br>network_reliability | live_line_status<br>network_reliability | Yes | Yes | Yes | No |
-| zh-live-red | multilingual | live_line_status | live_line_status | Yes | Yes | Yes | No |
-| zh-method | multilingual | metric_definition | metric_definition | Yes | Yes | Yes | No |
+| live-red-notices | live line | live_line_status | live_line_status | Yes | Yes | Yes | No |
+| define-two-metrics | methodology | metric_definition | metric_definition | Yes | Yes | Yes | No |
 
 Tool-call order is ignored. Expected arguments must appear in the selected call; the planner may add an optional supported argument.
 

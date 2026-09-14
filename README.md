@@ -115,9 +115,10 @@ pytest -q
 
 ## Agent evaluation
 
-The repository includes a fixed set of 15 questions covering network and line
-reliability, station headways, live status, metric definitions, a multi-tool
-comparison, and two Chinese questions. The evaluation checks three behaviors:
+The repository includes a fixed, all-English set of 15 questions covering
+network and line reliability, station headways, live status, metric
+definitions, a multi-tool comparison, and questions that ask for multiple
+metric definitions. The evaluation checks three behaviors:
 
 - whether the planner selected the expected tool and required arguments;
 - whether the final answer cites only evidence IDs from the same run;
@@ -150,8 +151,8 @@ The second [GPT-5.5 evaluation](evaluation/results-gpt-5.5.md) achieved:
 - fallbacks triggered: 0/15;
 - end-to-end pass: 15/15.
 
-This is a small development evaluation, not a held-out benchmark: I used the
-first run's failures to improve the prompt, then reran the same questions. Its
+This is a small development evaluation, not a held-out benchmark: I used an
+earlier run's failures to improve the prompt, then reran the fixed suite. Its
 value is as a repeatable regression check and a concrete record of what the
 current agent does.
 

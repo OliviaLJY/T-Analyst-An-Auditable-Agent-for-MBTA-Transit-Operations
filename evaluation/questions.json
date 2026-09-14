@@ -114,19 +114,19 @@
     "category": "multi-tool"
   },
   {
-    "id": "zh-live-red",
-    "question": "红线现在运行情况怎么样？有没有服务通知？",
+    "id": "live-red-notices",
+    "question": "How is the Red Line running right now? Are there any service notices?",
     "expected_calls": [
       {"name": "live_line_status", "arguments": {"line": "Red"}}
     ],
-    "category": "multilingual"
+    "category": "live line"
   },
   {
-    "id": "zh-method",
-    "question": "系统是怎么算 long gap 和 bunching 的？",
+    "id": "define-two-metrics",
+    "question": "How are long gaps and bunching calculated?",
     "expected_calls": [
       {"name": "metric_definition", "arguments": {}}
     ],
-    "category": "multilingual"
+    "category": "methodology"
   }
 ]

@@ -168,6 +168,8 @@ class TransitAnalyst:
                 "mean",
                 "decide",
                 "difference",
+                "calculate",
+                "calculated",
                 "how do you",
                 "怎么算",
                 "定义",

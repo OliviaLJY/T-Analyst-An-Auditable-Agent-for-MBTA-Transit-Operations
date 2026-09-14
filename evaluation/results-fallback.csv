@@ -12,5 +12,5 @@ station-state,historical station,Were there many long gaps at State on the Orang
 define-gap,methodology,How does T-Analyst decide that a gap is unusually long?,metric_definition({}),metric_definition({}),True,True,True,no_api_key,False,
 define-prediction,methodology,What is the difference between a prediction gap and a realized headway?,metric_definition({}),metric_definition({}),True,True,True,no_api_key,False,
 compare-orange,multi-tool,Compare current Orange Line conditions with its recent reliability.,"live_line_status({""line"": ""Orange""}); network_reliability({""line"": ""Orange""})","live_line_status({""line"": ""Orange""}); network_reliability({""line"": ""Orange""})",True,True,True,no_api_key,False,
-zh-live-red,multilingual,红线现在运行情况怎么样？有没有服务通知？,"live_line_status({""line"": ""Red""})","live_line_status({""line"": ""Red""})",True,True,True,no_api_key,False,
-zh-method,multilingual,系统是怎么算 long gap 和 bunching 的？,metric_definition({}),metric_definition({}),True,True,True,no_api_key,False,
+live-red-notices,live line,How is the Red Line running right now? Are there any service notices?,"live_line_status({""line"": ""Red""})","live_line_status({""line"": ""Red""})",True,True,True,no_api_key,False,
+define-two-metrics,methodology,How are long gaps and bunching calculated?,metric_definition({}),metric_definition({}),True,True,True,no_api_key,False,

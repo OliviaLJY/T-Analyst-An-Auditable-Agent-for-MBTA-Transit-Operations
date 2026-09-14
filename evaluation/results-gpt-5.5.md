@@ -1,6 +1,6 @@
 # Agent Evaluation — Parley GPT-5.5
 
-- Run time: `2026-09-14T15:19:14.830842+00:00`
+- Run time: `2026-09-14T15:24:58.012345+00:00`
 - Model: `gpt-5.5`
 - Questions: 15
 - Correct tool selection: 15/15 (100.0%)
@@ -23,8 +23,8 @@
 | define-gap | methodology | metric_definition | metric_definition | Yes | Yes | No | Yes |
 | define-prediction | methodology | metric_definition | metric_definition | Yes | Yes | No | Yes |
 | compare-orange | multi-tool | live_line_status<br>network_reliability | live_line_status<br>network_reliability | Yes | Yes | No | Yes |
-| zh-live-red | multilingual | live_line_status | live_line_status | Yes | Yes | No | Yes |
-| zh-method | multilingual | metric_definition | metric_definition | Yes | Yes | No | Yes |
+| live-red-notices | live line | live_line_status | live_line_status | Yes | Yes | No | Yes |
+| define-two-metrics | methodology | metric_definition | metric_definition | Yes | Yes | No | Yes |
 
 Tool-call order is ignored. Expected arguments must appear in the selected call; the planner may add an optional supported argument.
 

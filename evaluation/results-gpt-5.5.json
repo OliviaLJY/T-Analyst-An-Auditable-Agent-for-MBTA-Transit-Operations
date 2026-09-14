@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-09-14T15:19:14.830842+00:00",
+  "run_at": "2026-09-14T15:24:58.012345+00:00",
   "mode": "Parley GPT-5.5",
   "model": "gpt-5.5",
   "summary": {
@@ -29,7 +29,7 @@
         {
           "name": "network_reliability",
           "arguments": {},
-          "reason": "Retrieve recent line/route performance metrics, including long-gap rate, across subway routes to determine the highest value."
+          "reason": "Retrieve recent historical route/line performance metrics, including long-gap rate, across subway routes to identify the highest value."
         }
       ],
       "tool_selection_correct": true,
@@ -38,7 +38,7 @@
       "fallback_reason": "",
       "passed": true,
       "error": "",
-      "answer": "Green-D had the highest long-gap rate in the recent subway reliability data, at 0.176, or 17.6% of observations [E1].\n\nOperationally, this means Green-D had the largest share of observed service intervals classified as long gaps among the subway routes in the dataset, indicating passengers there were most likely to encounter unusually long waits relative to the schedule or expected headway [E1].\n\nLimitations: this is based only on the provided recent MBTA LAMP subway performance data, and the evidence does not specify the exact date range, stations, directions, or threshold definition used for “long gap” [E1]."
+      "answer": "Green-D had the highest long-gap rate in the recent subway data, at 17.6% [E1]. The next highest were Green-E at 17.0% and Green-B at 16.8% [E1].\n\nOperationally, this means Green-D had the largest share of service intervals classified as long gaps, so riders on that branch were more exposed to extended waits relative to scheduled headways than riders on the other subway routes in the evidence.\n\nLimitations: this is based on the route-level recent historical LAMP subway performance data provided; the evidence does not include the exact date range or the detailed long-gap threshold definition, and route-level averages can hide variation by station, direction, and time of day."
     },
     {
       "id": "hist-red",
@@ -69,7 +69,7 @@
       "fallback_reason": "",
       "passed": true,
       "error": "",
-      "answer": "The Red Line has been running close to scheduled headways recently, but with some uneven service.\n\nOperationally, the median headway ratio was 0.985, meaning typical spacing between trains was slightly better than scheduled [E1]. However, the 90th-percentile headway ratio was 1.478, so worse-case waits were substantially longer than scheduled [E1]. Gaps occurred on 0.094 of observations, and bunching occurred on 0.053 of observations, indicating noticeable reliability issues even though typical service looked near schedule [E1]. Median travel time excess was -50.0 seconds, meaning typical trips were slightly faster than the scheduled travel time benchmark [E1].\n\nLimitations: this is recent historical line-level performance from MBTA LAMP daily subway data, not a real-time status report or forecast [E1]. It summarizes the Red Line overall and may mask differences by branch, station, direction, or time of day."
+      "answer": "Finding: Recently, the Red Line has been running fairly close to scheduled spacing in the median, but with meaningful unreliability in the worse cases.\n\nOperationally:\n- The median headway ratio was 0.985, meaning typical train spacing was very close to the scheduled interval [E1].\n- The p90 headway ratio was 1.478, so high-delay spacing was substantially longer than scheduled [E1].\n- The gap rate was 0.094, indicating service gaps were a noticeable issue [E1].\n- The bunching rate was 0.053, so trains were also sometimes arriving too close together [E1].\n- Median travel-time excess was -50.0 seconds, suggesting the median trip was not slower than the comparison baseline in this aggregate [E1].\n\nLimitations: This is a line-level recent summary over 46,555 observations, so it does not show which stations, directions, or times of day drove the problems, nor does it identify causes [E1]."
     },
     {
       "id": "hist-green",
@@ -91,7 +91,7 @@
           "arguments": {
             "line": "Green"
           },
-          "reason": "The question asks for historical/recent performance by Green Line branch, specifically uneven train spacing, so route/line reliability metrics are sufficient."
+          "reason": "Retrieve historical/recent Green Line branch-level performance metrics that can indicate uneven train spacing."
         }
       ],
       "tool_selection_correct": true,
@@ -100,7 +100,7 @@
       "fallback_reason": "",
       "passed": true,
       "error": "",
-      "answer": "The Green Line **E branch** had the most uneven train spacing by the strongest spacing-unevenness indicator: it had the highest p90 headway ratio, **1.748** [E1].\n\nOperationally, that means E-branch riders were more likely than other Green Line riders to encounter very long waits at the high end of observed spacing variation. The result is close: the D branch had a p90 headway ratio of **1.742** and the highest gap rate, **0.176** [E1]. E and D also tied for the highest bunching rate, **0.108** [E1].\n\nLimitations: this is based on route-level historical/recent performance metrics, not a stop-by-stop or time-of-day breakdown. Also, the conclusion depends on using p90 headway ratio as the primary measure of uneven spacing; if prioritizing gap rate instead, the D branch would look worst [E1]."
+      "answer": "**Finding:** The **Green Line E branch** appears to have had the most uneven train spacing, based on the highest 90th-percentile headway ratio: **1.748** [E1]. This means its worst-end train spacing was the most stretched relative to scheduled/typical spacing among the branches.\n\n**Operational meaning:** Riders on the E branch were more likely to experience irregular spacing at the high-delay end—longer waits followed by uneven service. However, the picture is close: the D branch had the highest gap rate, **0.176**, compared with E at **0.170** [E1], and D and E tied on bunching rate at **0.108** [E1].\n\n**Limitations:** This conclusion is based on recent/historical route-level performance metrics only, not a stop-by-stop or time-of-day analysis. The evidence supports identifying uneven spacing from headway ratios, gap rates, and bunching rates, but it does not explain the causes."
     },
     {
       "id": "hist-blue",
@@ -122,7 +122,7 @@
           "arguments": {
             "line": "Blue"
           },
-          "reason": "The question asks for recent line-level performance/reliability metrics for the Blue Line, which are provided by network_reliability."
+          "reason": "Recent headway reliability is a historical line-level performance question, so network_reliability for the Blue Line is sufficient."
         }
       ],
       "tool_selection_correct": true,
@@ -131,7 +131,7 @@
       "fallback_reason": "",
       "passed": true,
       "error": "",
-      "answer": "Finding: Recent Blue Line headway reliability was generally close to schedule, with a median headway ratio of 1.003, meaning typical spacing was almost exactly scheduled [E1].\n\nOperationally, riders still experienced some uneven service: the 90th-percentile headway ratio was 1.367, so the worst regular gaps were notably longer than scheduled [E1]. The gap rate was 0.069, while bunching was less frequent at 0.019 [E1]. The dataset includes 27,174 observations [E1].\n\nTravel times were not a concern in this summary: median travel time excess was -34.0 seconds, indicating trips were slightly faster than the reference rather than delayed [E1].\n\nLimitations: This is line-level recent performance from MBTA LAMP daily subway data, so it does not show station-by-station patterns, direction, time-of-day variation, or the causes of gaps and bunching [E1]."
+      "answer": "Recent Blue Line headway reliability appears generally stable at the median, but with some uneven service: the median headway ratio was 1.003, meaning typical spacing was very close to scheduled, while the 90th-percentile headway ratio was 1.367, indicating the worst regular delays involved noticeably longer-than-scheduled waits [E1].\n\nOperationally, this means most riders likely experienced near-scheduled train spacing, but a meaningful minority encountered service gaps. The gap rate was 6.9%, while bunching was less common at 1.9% [E1]. Median travel time was not elevated; median travel time excess was -34 seconds [E1].\n\nLimitations: this is an aggregate Blue Line summary from 27,174 observations and does not break reliability down by station, direction, time of day, or cause [E1]. The evidence provides historical performance metrics only, not a diagnosis of specific incidents or current real-time conditions."
     },
     {
       "id": "live-orange",
@@ -153,7 +153,7 @@
           "arguments": {
             "line": "Orange"
           },
-          "reason": "The question asks what is happening right now, so current alerts, vehicles, and predictions for the Orange Line are needed."
+          "reason": "The question explicitly asks what is happening right now, so current/live Orange Line status is needed."
         }
       ],
       "tool_selection_correct": true,
@@ -162,7 +162,7 @@
       "fallback_reason": "",
       "passed": true,
       "error": "",
-      "answer": "The Orange Line is currently disrupted: there is an active shuttle bus diversion for station improvements and signal upgrades, with riders directed to use Commuter Rail or shuttle buses between Back Bay and Forest Hills through September 14 [E1].\n\nOperationally, Orange Line service is not operating normally over that segment, and trip planning should account for transfers to shuttle buses or Commuter Rail [E1]. The live feed also shows 10 Orange Line vehicles and 3 active alerts [E1]. Two of the alerts are ongoing Jackson Square station issues affecting platform conditions and stair access [E1].\n\nThe largest future prediction gaps shown are 7.4 minutes at Wellington, Malden Center, and Oak Grove in one direction, and 6.0 minutes at Oak Grove and Malden Center in the other direction [E1]. These are gaps between future predictions, not realized headways.\n\nLimitations: this is a live snapshot as of 2026-09-14 15:16:40 UTC [E1], and it reflects MBTA API alerts, vehicles, and predictions available at that moment only."
+      "answer": "The Orange Line is operating with a significant service advisory: MBTA reports shuttle-bus/Commuter Rail alternatives between Back Bay and Forest Hills due to station improvements and signal upgrades, plus Jackson Square station-access issues. Live status shows 10 vehicles and 3 active alerts as of the latest API snapshot [E1].\n\nOperationally:\n- Riders between Back Bay and Forest Hills should expect disrupted Orange Line service and use shuttle buses or Commuter Rail per the MBTA alert [E1].\n- Jackson Square has platform-renovation impacts that may make boarding/exiting harder for some riders, and a lobby-to-platform stairway closure with riders directed to the north-end stairway [E1].\n- The largest future prediction gap shown is 7.5 minutes at Oak Grove in direction 1; several other listed future prediction gaps are 6.0 minutes [E1].\n\nLimitations: the prediction gaps are minutes between consecutive future predictions at a stop/direction, not realized headways [E1]. This is a live API snapshot and may change quickly."
     },
     {
       "id": "live-blue",
@@ -184,7 +184,7 @@
           "arguments": {
             "line": "Blue"
           },
-          "reason": "The question explicitly asks for current vehicles, notices, and prediction information for the Blue Line."
+          "reason": "The question explicitly asks for current live information including vehicles, notices, and prediction gaps for the Blue Line."
         }
       ],
       "tool_selection_correct": true,
@@ -193,7 +193,7 @@
       "fallback_reason": "",
       "passed": true,
       "error": "",
-      "answer": "Finding: As of 2026-09-14 15:16 UTC, the Blue Line has 8 current vehicles, 1 active alert, and the largest listed prediction gaps are 10.2 minutes at several direction 0 stops [E1].\n\nOperational meaning:\n- Vehicles: 8 Blue Line vehicles are currently reported active [E1].\n- Notice/alert: 1 active delay-related alert says all trains will operate on the outbound/eastbound track between Wonderland and Revere Beach during the weekend of September 26–27 for switch work [E1].\n- Largest prediction gaps: 10.2-minute gaps are shown for direction 0 at Beachmont, Suffolk Downs, Orient Heights, Wood Island, and Airport [E1].\n\nLimitations: These gaps are minutes between consecutive future predictions at a stop and direction; they are not realized headways [E1]. The alert and vehicle counts reflect the MBTA API snapshot time only [E1]."
+      "answer": "Finding: As of 2026-09-14T15:22:16Z, the Blue Line has 8 vehicles active, 1 active notice, and the largest listed prediction gaps are 9.0 minutes [E1].\n\n- Vehicles: 8 current Blue Line vehicles [E1].\n- Notice: 1 active alert, a delay notice for weekend switch work: all trains will operate on the outbound/eastbound track between Wonderland and Revere Beach on September 26–27 [E1].\n- Largest prediction gaps: 9.0 minutes at Wood Island, Airport, Maverick, Aquarium, and State, all for direction_id 0 [E1].\n\nOperational meaning: The line is actively staffed with vehicles in service, but riders should be aware of the posted upcoming single-track operation. The listed prediction gaps indicate where scheduled/real-time future predictions are spaced farthest apart, which may signal longer expected waits at those stops/direction.\n\nLimitations: These are prediction gaps between consecutive future predictions at a stop and direction, not realized headways [E1]. This is a point-in-time snapshot and may change quickly."
     },
     {
       "id": "live-network",
@@ -211,7 +211,7 @@
         {
           "name": "live_line_status",
           "arguments": {},
-          "reason": "The question explicitly asks about service notices right now, so current live line status/alerts are needed."
+          "reason": "The question explicitly asks about notices right now, so current live subway status/alerts are needed."
         }
       ],
       "tool_selection_correct": true,
@@ -220,7 +220,7 @@
       "fallback_reason": "",
       "passed": true,
       "error": "",
-      "answer": "Yes — MBTA’s live status shows active subway service notices right now: the network has 9 active alerts as of 2026-09-14 15:16 UTC [E1].\n\nOperationally, the current notices include:\n\n- **Orange Line:** Jackson Square platform renovation/stairway issues; plus shuttle-bus or Commuter Rail alternatives between Back Bay and Forest Hills through September 14 [E1].\n- **Red Line:** Ashmont Branch shuttle buses will replace service between JFK/UMass and Ashmont for bridge work on September 19–20 [E1].\n- **Green Line:** C Branch station closures at Dean Road inbound from September 14 to October 9, and Brandon Hall through October 4 [E1].  \n- **Green Line:** No trains between North Station and parts of the B, C, D, and E branches on September 19–20, with bus and Orange Line alternatives noted [E1].\n- **Blue Line:** Trains will use the outbound/eastbound track between Wonderland and Revere Beach on September 26–27 for switch work [E1].\n\nLimitations: this is a snapshot from the MBTA API at 2026-09-14 15:16 UTC [E1]. Some listed items are active notices for upcoming planned work, not necessarily disruptions occurring at this exact minute."
+      "answer": "Yes — the live MBTA subway status shows **9 active subway alerts** as of **2026-09-14T15:22:16Z** [E1].\n\nOperationally, the active notices include:\n- **Orange Line**: Jackson Square station/platform issues, a stairway closure, and shuttle/Commuter Rail alternatives between Back Bay and Forest Hills [E1].\n- **Red Line**: planned shuttle buses on the Ashmont Branch between JFK/UMass and Ashmont [E1].\n- **Green Line**: C Branch station closures at Dean Road inbound and Brandon Hall, plus a planned weekend suspension affecting B, C, D, and E branches [E1].\n- **Blue Line**: planned single-track operation between Wonderland and Revere Beach [E1].\n\nLimitations: the feed reports **9** active alerts, but the provided alert-detail list contains **8** entries [E1]. Also, some active notices are future planned disruptions, not necessarily service problems happening at this exact moment [E1]."
     },
     {
       "id": "station-harvard",
@@ -244,7 +244,7 @@
             "station": "Harvard",
             "line": "Red"
           },
-          "reason": "The question asks about realized headways at a named station, so station_headways is the smallest sufficient tool."
+          "reason": "The question asks about realized headways for a named station on a specific line, which is a historical station headways analysis."
         }
       ],
       "tool_selection_correct": true,
@@ -253,7 +253,7 @@
       "fallback_reason": "",
       "passed": true,
       "error": "",
-      "answer": "Finding: Realized headways at Harvard on the Red Line could not be assessed from the provided evidence because the station-headways query returned “No matching station in the selected data” [E1].\n\nOperational meaning: There is no evidence here to describe how closely Red Line trains were spaced at Harvard, so no conclusion can be drawn about passenger wait consistency or service regularity at that station.\n\nLimitations: This result may reflect a station naming/data-selection issue rather than actual absence of service. No realized headway values were provided in the evidence [E1]."
+      "answer": "Finding: Realized headways at Harvard on the Red Line could not be assessed because the station query returned “No matching station in the selected data” [E1].\n\nOperational meaning: The available MBTA LAMP station-headways data did not provide headway observations for Harvard under this query, so there is no evidence here to describe train spacing or regularity at that station [E1].\n\nLimitations: This result reflects the selected data/query only; it does not prove Harvard had no service or no headways, only that no matching station was found in the selected dataset [E1]."
     },
     {
       "id": "station-kendall",
@@ -277,7 +277,7 @@
             "station": "Kendall/MIT",
             "line": "Red"
           },
-          "reason": "The question asks about recent train spacing at a named station, which is a station-level historical headways analysis."
+          "reason": "The question asks about recent train spacing at a named station, which is addressed by historical realized station headways."
         }
       ],
       "tool_selection_correct": true,
@@ -286,7 +286,7 @@
       "fallback_reason": "",
       "passed": true,
       "error": "",
-      "answer": "Finding: Recent realized train spacing/headways at Kendall/MIT on the Red Line cannot be summarized from the provided evidence because the station lookup returned “No matching station in the selected data” [E1].\n\nOperational meaning: The requested station-level headway analysis did not produce usable realized train-spacing results, so there is no evidence here to assess whether trains were evenly spaced, bunched, or experiencing long gaps at Kendall/MIT.\n\nLimitations: This reflects a data/station-matching issue in the selected dataset, not proof that service data does not exist or that trains did not operate there [E1]."
+      "answer": "No recent realized train spacing summary is available for Kendall/MIT on the Red Line because the station-headway data returned “No matching station in the selected data” for that station/line query [E1].\n\nOperationally, this means we cannot assess whether recent Red Line trains at Kendall/MIT were evenly spaced, bunched, or experiencing long gaps from the provided realized headway dataset.\n\nLimitation: the evidence contains no headway observations or summary statistics for Kendall/MIT, so any numeric spacing estimate would be unsupported."
     },
     {
       "id": "station-state",
@@ -310,7 +310,7 @@
             "station": "State",
             "line": "Orange"
           },
-          "reason": "The question asks about historical long gaps at a named station, which is best answered with realized station headways."
+          "reason": "The question asks about long gaps at a named station, which is a historical station headway analysis."
         }
       ],
       "tool_selection_correct": true,
@@ -319,7 +319,7 @@
       "fallback_reason": "",
       "passed": true,
       "error": "",
-      "answer": "Finding: No—there were some long gaps at State on the Orange Line, but not many overall. The observed gap rate was 0.062, or about 6.2%, across 2,597 observed headways [E1].\n\nOperational meaning: Most service at State was fairly regular: the median headway was 6.18 minutes, and the 90th-percentile headway was 9.0 minutes [E1]. That means long gaps were present, but they were a relatively small share of observed service rather than a dominant pattern.\n\nLimitations: This is an aggregate station-level result for State on the Orange Line, so it may hide differences by direction, time of day, or specific incidents. The evidence reports realized station headways, not predictions."
+      "answer": "Long gaps at State on the Orange Line were present but not especially common: the historical realized station headway gap rate was 0.062, with 2,597 observed headways [E1].\n\nOperationally, typical service was much shorter than a long-gap condition: the median realized headway was 6.18 minutes, while the 90th percentile headway was 9.0 minutes [E1]. That means most observed waits were around the regular service range, but riders did occasionally encounter substantially longer spacing between trains.\n\nLimitations: this is an aggregate historical station-headway result for State on the Orange Line, matched to `place-state`; it is not broken out by direction, time of day, or specific dates [E1]."
     },
     {
       "id": "define-gap",
@@ -339,7 +339,7 @@
           "arguments": {
             "metric": "unusually long gap"
           },
-          "reason": "The question asks for the definition/methodology of a metric, so only the metric definition tool is needed."
+          "reason": "This is a methodology question asking how a specific metric or classification is calculated."
         }
       ],
       "tool_selection_correct": true,
@@ -348,7 +348,7 @@
       "fallback_reason": "",
       "passed": true,
       "error": "",
-      "answer": "T-Analyst’s definition of an “unusually long gap” is not available from the provided evidence: the metric lookup returned “Unknown metric” [E1].\n\nOperationally, that means we cannot determine from this evidence what threshold, comparison baseline, or calculation T-Analyst uses to decide that a gap is unusually long.\n\nLimitation: this answer is based only on the supplied metric-definition evidence, which does not define the metric [E1]."
+      "answer": "Finding: The available T-Analyst/MBTA LAMP metric evidence does not define “unusually long gap”; the metric is returned as “Unknown metric” [E1].\n\nOperational meaning: From this evidence alone, we cannot say that T-Analyst uses a specific threshold, formula, scheduled-headway comparison, percentile, or other rule to decide that a gap is unusually long.\n\nLimitations: The answer is limited to the provided metric-definition evidence. Additional T-Analyst documentation or source logic would be needed to describe the actual methodology."
     },
     {
       "id": "define-prediction",
@@ -375,7 +375,7 @@
       "fallback_reason": "",
       "passed": true,
       "error": "",
-      "answer": "**Finding:** A **prediction gap** is a spacing in the prediction feed, while a **realized headway** is the actual observed spacing between vehicle departures.\n\nOperationally:\n\n- **Prediction gap:** the minutes between consecutive future predictions at the same stop and direction; it describes how far apart predicted arrivals/departures appear in the customer-facing or operational prediction data, and **is not a realized headway** [E1].\n- **Realized headway:** the observed departure headway, meaning the actual time spacing between departures as measured after service occurs; this is the observed quantity used in headway-based metrics such as headway ratio [E1].\n\n**Difference:** prediction gaps are about **future predictions in the data feed**; realized headways are about **actual observed service after vehicles depart**. A large prediction gap may indicate what riders are being shown or what the prediction system expects, but it should not be treated as proof of the actual headway that occurred.\n\n**Limitations:** The evidence explicitly defines prediction gap and references observed departure headway, but it does not provide a separate standalone definition labeled “realized headway” [E1]."
+      "answer": "A **prediction gap** is **not** a realized headway: it is the minutes between consecutive future predictions at one stop and direction [E1].\n\nOperationally, a prediction gap describes the spacing in the prediction feed—how far apart upcoming predicted arrivals or departures appear to be. A **realized headway**, by contrast, refers to actual observed service spacing after vehicles depart; related observed-headway metrics compare observed departure spacing with scheduled spacing, such as observed departure headway divided by scheduled headway [E1].\n\nThe key difference is: **prediction gap is forecast-feed spacing, while realized headway is actual observed vehicle spacing**. Limitation: the evidence defines prediction gap directly, but it does not provide a standalone formal definition of “realized headway” beyond observed-headway-based metrics [E1]."
     },
     {
       "id": "compare-orange",
@@ -403,14 +403,14 @@
           "arguments": {
             "line": "Orange"
           },
-          "reason": "The question asks for current Orange Line conditions, which requires live status, alerts, vehicles, or predictions."
+          "reason": "The question asks for current Orange Line conditions."
         },
         {
           "name": "network_reliability",
           "arguments": {
             "line": "Orange"
           },
-          "reason": "The question asks to compare current conditions with recent reliability, which requires recent line performance metrics."
+          "reason": "The question asks to compare current conditions with recent Orange Line reliability."
         }
       ],
       "tool_selection_correct": true,
@@ -419,12 +419,12 @@
       "fallback_reason": "",
       "passed": true,
       "error": "",
-      "answer": "**Finding:** Current Orange Line conditions appear worse for riders than the recent reliability baseline: recent reliability was near scheduled at the median, but live service has active disruption from a shuttle alert plus station issues.\n\n- **Current/live:** The Orange Line has **10 vehicles** in service and **3 active alerts** [E1]. The most operationally significant alert is a **shuttle** notice: riders are told to use Commuter Rail or shuttle buses between **Back Bay and Forest Hills** during work through **September 14** [E1]. There are also Jackson Square platform/stairway station issues [E1].\n- **Live predictions:** The largest listed future prediction gaps are **7.4 minutes** at Wellington, Malden Center, and Oak Grove in one direction, and **6.0 minutes** at Oak Grove and Malden Center in the other direction [E1]. These are prediction gaps, **not realized headways**.\n- **Recent reliability:** Recent Orange Line performance shows a **median headway ratio of 0.989**, meaning typical spacing was close to scheduled [E2]. The **p90 headway ratio was 1.394**, with a **gap rate of 0.068** and **bunching rate of 0.048** [E2]. Median travel time excess was **-45 seconds** [E2].\n\n**Operational meaning:** Recent reliability metrics suggest the Orange Line had generally stable typical spacing, but today’s rider experience is dominated by the shuttle diversion and station-access issues, especially for trips involving the Back Bay–Forest Hills segment.\n\n**Limitations:** This is a live snapshot as of the MBTA status pull, and prediction gaps are only future scheduled/predicted intervals, not observed headways [E1]. The reliability evidence summarizes recent performance but does not provide segment-level detail in the supplied data [E2]."
+      "answer": "Current Orange Line conditions look more disrupted than its recent reliability baseline: there are 3 active alerts, including a shuttle-bus substitution between Back Bay and Forest Hills, with 10 vehicles shown in service in the live snapshot [E1].\n\nOperationally, the current issue is not just routine variability: the shuttle alert means part of the line is not operating as normal rail service, while Jackson Square also has station-access/platform issues [E1]. The largest current prediction gap shown is 7.5 minutes at Oak Grove, with several 6.0-minute gaps also listed [E1].\n\nRecent reliability was comparatively moderate: across 38,602 observations, the Orange Line had a median headway ratio of 0.989, meaning typical spacing was close to scheduled, but the p90 headway ratio was 1.394, showing worse spacing in the tail [E2]. Its recent gap rate was 0.068 and bunching rate was 0.048, with median travel time excess of -45.0 seconds [E2].\n\nLimitations: the live gaps are minutes between consecutive future predictions at a stop and direction, not realized headways [E1]. The reliability data are an aggregate recent-history view and do not isolate today’s shuttle disruption or station-specific impacts [E2]."
     },
     {
-      "id": "zh-live-red",
-      "category": "multilingual",
-      "question": "红线现在运行情况怎么样？有没有服务通知？",
+      "id": "live-red-notices",
+      "category": "live line",
+      "question": "How is the Red Line running right now? Are there any service notices?",
       "expected_calls": "live_line_status({\"line\": \"Red\"})",
       "selected_calls": "live_line_status({\"line\": \"Red\"})",
       "expected_calls_raw": [
@@ -441,7 +441,7 @@
           "arguments": {
             "line": "Red"
           },
-          "reason": "问题明确询问“现在”运行情况和服务通知，因此需要查询红线实时状态、警报、车辆和预测信息。"
+          "reason": "The question explicitly asks about right now and service notices for the Red Line, which requires current live status and alerts."
         }
       ],
       "tool_selection_correct": true,
@@ -450,12 +450,12 @@
       "fallback_reason": "",
       "passed": true,
       "error": "",
-      "answer": "结论：红线目前有列车在运行，但有服务通知；系统显示红线有 22 辆车在线，并有 1 条活跃警报[E1]。\n\n运营含义：这条警报是关于 Ashmont 支线的未来施工安排：9 月 19–20 日周末，JFK/UMass 与 Ashmont 之间将由无障碍接驳巴士替代列车服务[E1]。目前预测信息里，JFK/UMass 等站点出现最大约 17.0 分钟的未来预测间隔[E1]；这表示同一站点同一方向相邻未来到站预测之间的间隔，不等同于已经发生的实际班距。\n\n限制：状态时间为 2026-09-14 15:16:40 UTC[E1]；实时车辆位置、预测和警报可能随时变化。"
+      "answer": "The Red Line is operating with live tracking showing 22 vehicles and 1 active service alert as of 15:22 UTC [E1].\n\nOperationally, the active notice is for the Ashmont Branch: accessible shuttle buses will replace Red Line service between JFK/UMass and Ashmont during critical bridge work on the weekend of September 19–20 [E1]. The largest listed future prediction spacing is 19.3 minutes at several south-side stops, including JFK/UMass, North Quincy, Wollaston, Quincy Center, and Quincy Adams [E1].\n\nLimitations: this is a live snapshot from the MBTA API, and the listed 19.3-minute values are gaps between future predictions at specific stops/directions—not realized headways [E1]."
     },
     {
-      "id": "zh-method",
-      "category": "multilingual",
-      "question": "系统是怎么算 long gap 和 bunching 的？",
+      "id": "define-two-metrics",
+      "category": "methodology",
+      "question": "How are long gaps and bunching calculated?",
       "expected_calls": "metric_definition({})",
       "selected_calls": "metric_definition({})",
       "expected_calls_raw": [
@@ -468,7 +468,7 @@
         {
           "name": "metric_definition",
           "arguments": {},
-          "reason": "问题询问多个指标的定义和计算方法，应调用 metric_definition 且不指定 metric，以返回完整指标字典。"
+          "reason": "The question asks for definitions/calculation methods for multiple metrics, so request the full metric dictionary with one call."
         }
       ],
       "tool_selection_correct": true,
@@ -477,7 +477,7 @@
       "fallback_reason": "",
       "passed": true,
       "error": "",
-      "answer": "结论：系统用“实际观测到的发车间隔”相对于“计划发车间隔”的比例来判定 long gap 和 bunching。\n\n- **Long gap / gap rate**：计算所有观测到的 headway 中，有多少比例 **大于计划 headway 的 1.5 倍**；这个比例就是 gap rate。[E1]  \n  - 运营含义：表示乘客等车时间明显变长，服务间隔被拉大。\n\n- **Bunching / bunching rate**：计算所有观测到的 headway 中，有多少比例 **小于计划 headway 的 0.5 倍**；这个比例就是 bunching rate。[E1]  \n  - 运营含义：表示车辆过于接近，可能出现“扎堆”，通常会导致后面出现更大的间隔。\n\n- **基础量**：headway ratio = 观测发车间隔 ÷ 计划发车间隔。[E1]\n\n限制：这些指标基于**已观测到的发车间隔**，不是预测值；系统里的 prediction gap 指的是同一站点和方向上连续未来预测之间的分钟差，**不是实际发生的 headway**。[E1]"
+      "answer": "Finding: MBTA subway “long gaps” are calculated as the share of observed headways greater than 1.5× the scheduled headway, while “bunching” is the share of observed headways below 0.5× the scheduled headway [E1].\n\nOperational meaning: a long gap flags service spacing that is much wider than scheduled, meaning riders wait longer than planned. Bunching flags trains arriving too close together, which often means uneven spacing and reduced usefulness of following trains.\n\nLimitations: these metrics use observed departure headways compared with scheduled headways [E1]. They are not based on prediction gaps; prediction gaps are minutes between consecutive future predictions at one stop and direction and are not realized headways [E1]."
     }
   ]
 }

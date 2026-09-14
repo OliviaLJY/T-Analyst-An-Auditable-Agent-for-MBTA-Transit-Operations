@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-09-14T15:06:25.503320+00:00",
+  "run_at": "2026-09-14T15:22:09.547272+00:00",
   "mode": "fallback baseline",
   "model": "deterministic-fallback",
   "summary": {
@@ -164,7 +164,7 @@
       "fallback_reason": "no_api_key",
       "passed": false,
       "error": "",
-      "answer": "Parley is unavailable, so this is a deterministic evidence summary.\n\n[E1] {\"line\": \"Orange\", \"as_of\": \"2026-09-14T15:06:24.102098+00:00\", \"vehicle_count\": 10, \"active_alert_count\": 3, \"alerts\": [{\"alert_id\": \"1001814\", \"effect\": \"STATION_ISSUE\", \"header\": \"The platform at Jackson Square is undergoing renovations to improve safety and accessibility. Sections of the platform are unlevel, which may make it difficult for some riders to board and exit trains.\", \"routes\": [\"Orange\"], \"updated_at\": \"2026-07-21T20:49:43-04:00\"}, {\"alert_id\": \"1001861\", \"effect\": \"STATION_ISSUE\", \"header\": \"The stairway connecting the Jackson Square lobby and the south end of the platform is closed until winter 2026. Use the stairway at the north end of the platform. This closure is for th"
+      "answer": "Parley is unavailable, so this is a deterministic evidence summary.\n\n[E1] {\"line\": \"Orange\", \"as_of\": \"2026-09-14T15:22:08.068105+00:00\", \"vehicle_count\": 10, \"active_alert_count\": 3, \"alerts\": [{\"alert_id\": \"1001814\", \"effect\": \"STATION_ISSUE\", \"header\": \"The platform at Jackson Square is undergoing renovations to improve safety and accessibility. Sections of the platform are unlevel, which may make it difficult for some riders to board and exit trains.\", \"routes\": [\"Orange\"], \"updated_at\": \"2026-07-21T20:49:43-04:00\"}, {\"alert_id\": \"1001861\", \"effect\": \"STATION_ISSUE\", \"header\": \"The stairway connecting the Jackson Square lobby and the south end of the platform is closed until winter 2026. Use the stairway at the north end of the platform. This closure is for th"
     },
     {
       "id": "live-blue",
@@ -195,7 +195,7 @@
       "fallback_reason": "no_api_key",
       "passed": false,
       "error": "",
-      "answer": "Parley is unavailable, so this is a deterministic evidence summary.\n\n[E1] {\"line\": \"Blue\", \"as_of\": \"2026-09-14T15:06:24.102098+00:00\", \"vehicle_count\": 8, \"active_alert_count\": 1, \"alerts\": [{\"alert_id\": \"1028255\", \"effect\": \"DELAY\", \"header\": \"Blue Line: All trains will operate on the outbound/eastbound track between Wonderland and Revere Beach the weekend of September 26 – 27, for switch work. \", \"routes\": [\"Blue\"], \"updated_at\": \"2026-08-19T08:42:11-04:00\"}], \"largest_prediction_gaps\": [{\"route_id\": \"Blue\", \"stop_name\": \"Wonderland\", \"direction_id\": 1, \"gap_minutes\": 10.5}, {\"route_id\": \"Blue\", \"stop_name\": \"Wonderland\", \"direction_id\": 0, \"gap_minutes\": 10.5}, {\"route_id\": \"Blue\", \"stop_name\": \"Revere Beach\", \"direction_id\": 0, \"gap_minutes\": 10.5}, {\"route_i"
+      "answer": "Parley is unavailable, so this is a deterministic evidence summary.\n\n[E1] {\"line\": \"Blue\", \"as_of\": \"2026-09-14T15:22:08.068105+00:00\", \"vehicle_count\": 8, \"active_alert_count\": 1, \"alerts\": [{\"alert_id\": \"1028255\", \"effect\": \"DELAY\", \"header\": \"Blue Line: All trains will operate on the outbound/eastbound track between Wonderland and Revere Beach the weekend of September 26 – 27, for switch work. \", \"routes\": [\"Blue\"], \"updated_at\": \"2026-08-19T08:42:11-04:00\"}], \"largest_prediction_gaps\": [{\"route_id\": \"Blue\", \"stop_name\": \"Wood Island\", \"direction_id\": 0, \"gap_minutes\": 9.0}, {\"route_id\": \"Blue\", \"stop_name\": \"Airport\", \"direction_id\": 0, \"gap_minutes\": 9.0}, {\"route_id\": \"Blue\", \"stop_name\": \"Maverick\", \"direction_id\": 0, \"gap_minutes\": 9.0}, {\"route_id\": \"Blue"
     },
     {
       "id": "live-network",
@@ -224,7 +224,7 @@
       "fallback_reason": "no_api_key",
       "passed": false,
       "error": "",
-      "answer": "Parley is unavailable, so this is a deterministic evidence summary.\n\n[E1] {\"line\": \"Network\", \"as_of\": \"2026-09-14T15:06:24.102098+00:00\", \"vehicle_count\": 98, \"active_alert_count\": 9, \"alerts\": [{\"alert_id\": \"1001814\", \"effect\": \"STATION_ISSUE\", \"header\": \"The platform at Jackson Square is undergoing renovations to improve safety and accessibility. Sections of the platform are unlevel, which may make it difficult for some riders to board and exit trains.\", \"routes\": [\"Orange\"], \"updated_at\": \"2026-07-21T20:49:43-04:00\"}, {\"alert_id\": \"1001861\", \"effect\": \"STATION_ISSUE\", \"header\": \"The stairway connecting the Jackson Square lobby and the south end of the platform is closed until winter 2026. Use the stairway at the north end of the platform. This closure is for t"
+      "answer": "Parley is unavailable, so this is a deterministic evidence summary.\n\n[E1] {\"line\": \"Network\", \"as_of\": \"2026-09-14T15:22:08.068105+00:00\", \"vehicle_count\": 99, \"active_alert_count\": 9, \"alerts\": [{\"alert_id\": \"1001814\", \"effect\": \"STATION_ISSUE\", \"header\": \"The platform at Jackson Square is undergoing renovations to improve safety and accessibility. Sections of the platform are unlevel, which may make it difficult for some riders to board and exit trains.\", \"routes\": [\"Orange\"], \"updated_at\": \"2026-07-21T20:49:43-04:00\"}, {\"alert_id\": \"1001861\", \"effect\": \"STATION_ISSUE\", \"header\": \"The stairway connecting the Jackson Square lobby and the south end of the platform is closed until winter 2026. Use the stairway at the north end of the platform. This closure is for t"
     },
     {
       "id": "station-harvard",
@@ -421,12 +421,12 @@
       "fallback_reason": "no_api_key",
       "passed": false,
       "error": "",
-      "answer": "Parley is unavailable, so this is a deterministic evidence summary.\n\n[E1] {\"line\": \"Orange\", \"as_of\": \"2026-09-14T15:06:24.102098+00:00\", \"vehicle_count\": 10, \"active_alert_count\": 3, \"alerts\": [{\"alert_id\": \"1001814\", \"effect\": \"STATION_ISSUE\", \"header\": \"The platform at Jackson Square is undergoing renovations to improve safety and accessibility. Sections of the platform are unlevel, which may make it difficult for some riders to board and exit trains.\", \"routes\": [\"Orange\"], \"updated_at\": \"2026-07-21T20:49:43-04:00\"}, {\"alert_id\": \"1001861\", \"effect\": \"STATION_ISSUE\", \"header\": \"The stairway connecting the Jackson Square lobby and the south end of the platform is closed until winter 2026. Use the stairway at the north end of the platform. This closure is for th\n\n[E2] Orange: gap rate 0.068, based on 38602 observations."
+      "answer": "Parley is unavailable, so this is a deterministic evidence summary.\n\n[E1] {\"line\": \"Orange\", \"as_of\": \"2026-09-14T15:22:08.068105+00:00\", \"vehicle_count\": 10, \"active_alert_count\": 3, \"alerts\": [{\"alert_id\": \"1001814\", \"effect\": \"STATION_ISSUE\", \"header\": \"The platform at Jackson Square is undergoing renovations to improve safety and accessibility. Sections of the platform are unlevel, which may make it difficult for some riders to board and exit trains.\", \"routes\": [\"Orange\"], \"updated_at\": \"2026-07-21T20:49:43-04:00\"}, {\"alert_id\": \"1001861\", \"effect\": \"STATION_ISSUE\", \"header\": \"The stairway connecting the Jackson Square lobby and the south end of the platform is closed until winter 2026. Use the stairway at the north end of the platform. This closure is for th\n\n[E2] Orange: gap rate 0.068, based on 38602 observations."
     },
     {
-      "id": "zh-live-red",
-      "category": "multilingual",
-      "question": "红线现在运行情况怎么样？有没有服务通知？",
+      "id": "live-red-notices",
+      "category": "live line",
+      "question": "How is the Red Line running right now? Are there any service notices?",
       "expected_calls": "live_line_status({\"line\": \"Red\"})",
       "selected_calls": "live_line_status({\"line\": \"Red\"})",
       "expected_calls_raw": [
@@ -452,12 +452,12 @@
       "fallback_reason": "no_api_key",
       "passed": false,
       "error": "",
-      "answer": "Parley is unavailable, so this is a deterministic evidence summary.\n\n[E1] {\"line\": \"Red\", \"as_of\": \"2026-09-14T15:06:24.102098+00:00\", \"vehicle_count\": 22, \"active_alert_count\": 1, \"alerts\": [{\"alert_id\": \"1028254\", \"effect\": \"SHUTTLE\", \"header\": \"Red Line Ashmont Branch: Critical bridge work will be taking place the weekend of September 19-20. Accessible shuttle buses will replace service between JFK/UMass and Ashmont.\", \"routes\": [\"Red\"], \"updated_at\": \"2026-09-14T11:00:22-04:00\"}], \"largest_prediction_gaps\": [{\"route_id\": \"Red\", \"stop_name\": \"JFK/UMass\", \"direction_id\": 0, \"gap_minutes\": 15.6}, {\"route_id\": \"Red\", \"stop_name\": \"North Quincy\", \"direction_id\": 0, \"gap_minutes\": 15.6}, {\"route_id\": \"Red\", \"stop_name\": \"Wollaston\", \"direction_id\": 0, \"gap_minutes\":"
+      "answer": "Parley is unavailable, so this is a deterministic evidence summary.\n\n[E1] {\"line\": \"Red\", \"as_of\": \"2026-09-14T15:22:08.068105+00:00\", \"vehicle_count\": 22, \"active_alert_count\": 1, \"alerts\": [{\"alert_id\": \"1028254\", \"effect\": \"SHUTTLE\", \"header\": \"Red Line Ashmont Branch: Critical bridge work will be taking place the weekend of September 19-20. Accessible shuttle buses will replace service between JFK/UMass and Ashmont.\", \"routes\": [\"Red\"], \"updated_at\": \"2026-09-14T11:00:22-04:00\"}], \"largest_prediction_gaps\": [{\"route_id\": \"Red\", \"stop_name\": \"JFK/UMass\", \"direction_id\": 0, \"gap_minutes\": 19.1}, {\"route_id\": \"Red\", \"stop_name\": \"North Quincy\", \"direction_id\": 0, \"gap_minutes\": 19.1}, {\"route_id\": \"Red\", \"stop_name\": \"Wollaston\", \"direction_id\": 0, \"gap_minutes\":"
     },
     {
-      "id": "zh-method",
-      "category": "multilingual",
-      "question": "系统是怎么算 long gap 和 bunching 的？",
+      "id": "define-two-metrics",
+      "category": "methodology",
+      "question": "How are long gaps and bunching calculated?",
       "expected_calls": "metric_definition({})",
       "selected_calls": "metric_definition({})",
       "expected_calls_raw": [
