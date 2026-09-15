@@ -122,54 +122,32 @@ pytest -q
 
 ## Agent evaluation
 
-The repository includes a fixed, all-English set of 20 questions covering
-network and line reliability, station headways, live status, metric
-definitions, a multi-tool comparison, and questions that ask for multiple
-metric definitions. The evaluation checks four behaviors:
+T-Analyst includes a fixed 20-question evaluation suite covering historical
+reliability, live service status, station-level headways, metric definitions,
+station aliases, and multi-tool comparison.
 
-- whether the planner selected the expected tool and required arguments;
-- whether each tool returned usable evidence rather than an empty/error result;
-- whether the final answer cites only evidence IDs from the same run;
-- whether deterministic fallback behavior was triggered.
+The final GPT-5.5 evaluation achieved:
 
-Run the GPT-5.5 evaluation from a shell with the Parley key:
+- correct tool selection: **20/20**
+- usable tool results: **20/20**
+- valid final citations: **20/20**
+- fallbacks triggered: **0/20**
+- end-to-end pass: **20/20**
+
+The suite also includes station-alias and dynamic station-resolution cases such
+as Harvard Square, Kendall Square, MIT, State Street, and Park Street.
+
+This is a small development evaluation rather than a held-out benchmark. It is
+used primarily as a repeatable regression check for tool selection, evidence
+quality, entity resolution, and grounding.
+
+Run:
 
 ```bash
 python evaluate_agent.py
-```
 
-This makes 20 planning calls and 20 answer calls, then writes CSV, JSON, and
-Markdown results under `evaluation/`. To evaluate no-key behavior instead:
-
-```bash
-python evaluate_agent.py --force-fallback
-```
-
-In the first 15-question GPT-5.5 development run, required evidence citations
-were valid for 15/15 questions and no fallback was triggered, but strict tool
-selection was correct for only 9/15. The model usually selected the right
-primary tool and then added an unnecessary `metric_definition` or live-status
-call. I revised the planner prompt to require the smallest sufficient plan and
-to reserve live and definition tools for questions that explicitly ask for
-them.
-
-The expanded [GPT-5.5 evaluation](evaluation/results-gpt-5.5.md) achieved:
-
-- correct tool selection: 20/20;
-- usable tool results: 20/20;
-- valid final citations: 20/20;
-- fallbacks triggered: 0/20;
-- end-to-end pass: 20/20.
-
-This is a small development evaluation, not a held-out benchmark: I used an
-earlier run's failures to improve the prompt, then reran the fixed suite. Its
-value is as a repeatable regression check and a concrete record of what the
-current agent does.
-
-The committed [fallback baseline](evaluation/results-fallback.md) also selects
-the expected tools for 20/20 questions, returns usable results for 20/20, and
-returns valid citations for 20/20. All rows correctly report that fallback was
-used, so the fallback run has zero full-agent passes by design.
+See the interactive evaluation report:
+[evaluation report](evaluation/results-gpt-5.5.html)
 
 ## Data and resources
 
