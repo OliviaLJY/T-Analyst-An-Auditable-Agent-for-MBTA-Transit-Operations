@@ -1,4 +1,4 @@
-"""Render a self-contained HTML evaluation report from a JSON result file."""
+"""Render HTML and Markdown evaluation reports from a JSON result file."""
 
 from __future__ import annotations
 
@@ -282,6 +282,103 @@ def render_report(report: dict[str, Any]) -> str:
 """
 
 
+def render_markdown(report: dict[str, Any]) -> str:
+    """Render a GitHub-friendly report with collapsible case details."""
+    summary = report["summary"]
+    results = report["results"]
+    lines = [
+        f"# Agent Evaluation — {report['mode']}",
+        "",
+        f"- Run time: `{report['run_at']}`",
+        f"- Model: `{report['model']}`",
+        "",
+        "## Summary",
+        "",
+        "| Cases | Tool selection | Usable results | Valid citations | Fallback |",
+        "|---:|---:|---:|---:|---:|",
+        (
+            f"| {summary['total']} | {summary['tool_selection_correct']}/"
+            f"{summary['total']} | {summary['result_valid']}/{summary['total']} | "
+            f"{summary['citation_valid']}/{summary['total']} | "
+            f"{summary['fallback_triggered']} |"
+        ),
+        "",
+        "## Case overview",
+        "",
+        "| ID | Category | Expected tool | Selected tool | Result | Citation | Pass |",
+        "|---|---|---|---|---:|---:|---:|",
+    ]
+
+    for result in results:
+        expected_tools = "<br>".join(
+            escape(call["name"]) for call in result["expected_calls_raw"]
+        )
+        selected_tools = (
+            "<br>".join(escape(call["name"]) for call in result["selected_calls_raw"])
+            or escape(result.get("error") or "")
+            or "—"
+        )
+        mark = lambda value: "Yes" if value else "No"
+        lines.append(
+            f"| {escape(result['id'])} | {escape(result['category'])} | "
+            f"{expected_tools} | {selected_tools} | "
+            f"{mark(result['result_valid'])} | {mark(result['citation_valid'])} | "
+            f"{mark(result['passed'])} |"
+        )
+
+    lines.extend(["", "## Case details", ""])
+    for index, result in enumerate(results, start=1):
+        question = escape(result["question"])
+        category = escape(result["category"])
+        expected_calls = escape(result["expected_calls"])
+        selected_calls = escape(
+            result["selected_calls"] or result.get("error") or "—"
+        )
+        answer = "\n".join(
+            line.rstrip()
+            for line in (result["answer"] or "No answer returned.").splitlines()
+        )
+        mark = lambda value: "Yes" if value else "No"
+        lines.extend(
+            [
+                "<details>",
+                f"<summary><strong>{index:02d}. {question}</strong></summary>",
+                "",
+                f"**Category:** {category}",
+                "",
+                "| Expected tool | Selected tool | Tool correct | Result valid | "
+                "Citation valid | Fallback |",
+                "|---|---|---:|---:|---:|---:|",
+                (
+                    f"| <code>{expected_calls}</code> | "
+                    f"<code>{selected_calls}</code> | "
+                    f"{mark(result['tool_selection_correct'])} | "
+                    f"{mark(result['result_valid'])} | "
+                    f"{mark(result['citation_valid'])} | "
+                    f"{mark(result['fallback_triggered'])} |"
+                ),
+                "",
+                "**Final answer**",
+                "",
+                answer,
+                "",
+                "</details>",
+                "",
+            ]
+        )
+
+    lines.extend(
+        [
+            "Tool-call order is ignored. Expected arguments must appear in the "
+            "selected call; the planner may add an optional supported argument.",
+            "",
+            "A fallback is recorded when no API key is used or when the model answer "
+            "fails citation validation.",
+        ]
+    )
+    return "\n".join(lines) + "\n"
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -295,11 +392,18 @@ def main() -> None:
         type=Path,
         default=Path(__file__).with_name("results-gpt-5.5.html"),
     )
+    parser.add_argument(
+        "--markdown-output",
+        type=Path,
+        default=Path(__file__).with_name("results-gpt-5.5.md"),
+    )
     args = parser.parse_args()
 
     report = json.loads(args.input.read_text(encoding="utf-8"))
     args.output.write_text(render_report(report), encoding="utf-8")
+    args.markdown_output.write_text(render_markdown(report), encoding="utf-8")
     print(f"Wrote {args.output}")
+    print(f"Wrote {args.markdown_output}")
 
 
 if __name__ == "__main__":

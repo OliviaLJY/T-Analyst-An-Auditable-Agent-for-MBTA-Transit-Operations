@@ -144,24 +144,6 @@ pytest -q
 
 ## Agent evaluation
 
-T-Analyst includes a fixed 20-question evaluation suite covering historical
-reliability, live service status, station-level headways, metric definitions,
-station aliases, and multi-tool comparison.
-
-The final GPT-5.5 evaluation achieved:
-
-- correct tool selection: **20/20**
-- usable tool results: **20/20**
-- valid final citations: **20/20**
-- end-to-end pass: **20/20**
-
-The suite also includes station-alias and dynamic station-resolution cases such
-as Harvard Square, Kendall Square, MIT, State Street, and Park Street.
-
-This is a small development evaluation rather than a held-out benchmark. It is
-used primarily as a repeatable regression check for tool selection, evidence
-quality, entity resolution, and grounding.
-
 See the full evaluation report:
 [evaluation report](evaluation/results-gpt-5.5.md)
 
