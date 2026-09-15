@@ -2,29 +2,35 @@
 
 **Position/Track: Agentic AI**
 
-I built T-Analyst for someone who has a question about subway service but does
-not know how to work with GTFS, LAMP, or the MBTA APIs. The app puts a live
-network view and a natural-language analysis tool in one place. More
-importantly, it keeps the evidence visible: each answer can be traced back to
-the tool call, parameters, source, timestamp, and rows used to produce it.
+T-Analyst is an interactive transit-analysis tool for users who have questions
+about subway service but do not know how to work directly with GTFS, MBTA APIs,
+or historical operations datasets.
+
+The app combines a live MBTA network view with a natural-language analysis
+interface. Its main design goal is auditability: each answer can be traced to
+the tool call, parameters, data source, timestamp, and evidence used to produce
+it.
 
 ## Why this is useful
 
-Transit data is public, but it is not especially approachable. Answering a
-simple question such as “Which line had the most uneven spacing this week?”
-usually means finding the right feed, understanding service dates, matching
-observed and scheduled headways, and deciding what to do with missing values.
+Transit data is public, but it is not always easy to use. A question such as
+“Which line had the most uneven train spacing recently?” can require finding
+the correct dataset, understanding service dates, matching observed and
+scheduled headways, and handling missing values.
 
-A chat interface lowers that barrier, but only if its answers can be checked.
-For that reason, I did not let the language model calculate metrics or generate
-arbitrary SQL. Its job is narrower: understand the question, choose from four
-read-only tools, and explain the evidence those tools return. The calculations
-remain regular Python code.
+A natural-language interface can lower that barrier, but only if the resulting
+answers can be checked.
 
-I limited the project to MBTA subway service. The historical view uses the
-latest seven complete LAMP service days, while the live view uses a current
-MBTA V3 API snapshot. This was enough scope to demonstrate an agentic workflow
-without implying that a short prototype is a production operations system.
+For that reason, T-Analyst does not ask the language model to calculate transit
+metrics or generate arbitrary SQL. The model has a narrower role: understand
+the user's question, select from a small set of read-only analysis tools, and
+explain the evidence returned by those tools. Metric calculations remain in
+deterministic Python code.
+
+I limited the prototype to MBTA subway service. Historical analysis uses the
+latest seven complete MBTA LAMP service days, while live analysis uses a current
+MBTA V3 API snapshot. This scope was large enough to demonstrate an agentic
+workflow while remaining appropriate for a short technical evaluation.
 
 ## Artifact
 
@@ -44,37 +50,53 @@ Questions the artifact is designed to answer include:
 - What is happening on the Orange Line right now?
 - How does the app decide that a gap is unusually long?
 
-A short project deck and speaking notes are available in
-[presentation/](presentation/).
+![T-Analyst question and auditable answer](artifacts/t-analyst-question-answer.png)
 
 ## Method
 
-The historical data has one row for each observed trip-stop pair. For every row
-with a usable observed and scheduled headway, I calculate:
+For historical analysis, I calculate the following metrics from MBTA LAMP data:
 
 - `headway ratio = observed headway / scheduled headway`
 - `gap = headway ratio > 1.5`
 - `bunched = headway ratio < 0.5`
 - `travel-time excess = observed travel time - scheduled travel time`
 
-A live prediction gap is the interval between consecutive future predictions
-for one route, stop, and direction. I keep it separate from historical
-headways: a prediction can change and is not proof of an actual passenger wait.
+A **headway** is the time spacing between consecutive trains in the same service
+context. A realized headway describes observed train spacing; it is not the same
+as an individual passenger's wait time.
 
-LAMP's exported `parent_station` values are MBTA place IDs rather than
-rider-facing names. Before a station query runs, the app resolves common aliases
-such as Harvard Square, Kendall, Kendall/MIT, Kendall Square, MIT, State, and
-State Street to canonical IDs. For other subway stations, it uses the MBTA V3
-stop index and a conservative fuzzy match. The evidence records the requested
-name, canonical name, place ID, and resolution method.
+A **live prediction gap** is the interval between consecutive future predictions
+for one route, stop, and direction. I keep prediction gaps separate from
+historical realized headways because predictions can change and are not proof
+of actual observed train spacing.
 
-When a user asks a question, Parley GPT-5.5 first returns a small JSON plan with
-one to three tool calls. Pydantic checks the tool names, arguments, route names,
-and required fields before anything runs. The selected Python tools then return
-structured evidence with IDs such as `[E1]`. GPT-5.5 writes the final
-explanation from that evidence. If the answer fails to cite evidence from the
-same run, the app falls back to a deterministic summary rather than showing an
-unsupported response.
+### Station resolution
+
+LAMP exports use canonical MBTA place IDs in fields such as `parent_station`
+rather than rider-facing names.
+
+Before a station query runs, T-Analyst:
+
+1. normalizes case, punctuation, and spacing;
+2. maps common aliases such as Harvard Square, Kendall, Kendall Square, MIT,
+   State Street, and State Station to canonical MBTA place IDs;
+3. uses the current MBTA V3 station index for other subway stations;
+4. applies conservative fuzzy matching only when no exact match is available;
+5. records the requested name, canonical name, place ID, and resolution method
+   in the returned evidence.
+
+### Agent workflow
+
+When a user submits a question, Parley GPT-5.5 first produces a small JSON plan
+containing one to three tool calls.
+
+Pydantic validates the tool names, arguments, route names, and required fields
+before execution. The selected read-only Python tools then return structured
+evidence with IDs such as `[E1]`.
+
+GPT-5.5 generates the final explanation only from that evidence. If the answer
+does not cite evidence produced in the same run, T-Analyst falls back to a
+deterministic summary rather than displaying an unsupported response.
 
 ## Key findings
 
@@ -131,7 +153,6 @@ The final GPT-5.5 evaluation achieved:
 - correct tool selection: **20/20**
 - usable tool results: **20/20**
 - valid final citations: **20/20**
-- fallbacks triggered: **0/20**
 - end-to-end pass: **20/20**
 
 The suite also includes station-alias and dynamic station-resolution cases such
