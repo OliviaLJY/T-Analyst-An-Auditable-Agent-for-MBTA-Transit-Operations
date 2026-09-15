@@ -144,6 +144,30 @@ pytest -q
 
 ## Agent evaluation
 
+T-Analyst includes a fixed 20-question regression suite covering:
+
+- historical network and line reliability;
+- live service status;
+- station-level realized headways;
+- metric definitions;
+- station aliases and entity resolution;
+- multi-tool comparison.
+
+On the current 20-question GPT-5.5 evaluation:
+
+- correct tool selection: **20/20**
+- usable tool results: **20/20**
+- valid final citations: **20/20**
+- end-to-end pass: **20/20**
+
+The suite includes rider-facing station names such as Harvard Square, Kendall
+Square, MIT, State Street, and Park Street, as well as questions that require
+combining live and historical evidence.
+
+This is a small development evaluation rather than a held-out benchmark. Its
+purpose is to provide a repeatable regression check for tool selection,
+evidence quality, entity resolution, and grounding.
+
 See the full evaluation report:
 [evaluation report](evaluation/results-gpt-5.5.md)
 
