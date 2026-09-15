@@ -141,13 +141,8 @@ This is a small development evaluation rather than a held-out benchmark. It is
 used primarily as a repeatable regression check for tool selection, evidence
 quality, entity resolution, and grounding.
 
-Run:
-
-```bash
-python evaluate_agent.py
-
-See the interactive evaluation report:
-[evaluation report](evaluation/results-gpt-5.5.html)
+See the full evaluation report:
+[evaluation report](evaluation/results-gpt-5.5.md)
 
 ## Data and resources
 
