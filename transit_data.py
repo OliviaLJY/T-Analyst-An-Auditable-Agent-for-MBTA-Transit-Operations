@@ -4,7 +4,10 @@ from __future__ import annotations
 
 import json
 import os
+import re
+from difflib import get_close_matches
 from datetime import date, datetime, timedelta, timezone
+from functools import lru_cache
 from pathlib import Path
 from typing import Any, Iterable
 
@@ -33,6 +36,39 @@ METRIC_DEFINITIONS = {
         "This is not a realized headway."
     ),
 }
+METRIC_ALIASES = {
+    "headway ratio": "headway_ratio",
+    "long gap": "gap_rate",
+    "long gaps": "gap_rate",
+    "unusually long gap": "gap_rate",
+    "gap": "gap_rate",
+    "gap rate": "gap_rate",
+    "bunching": "bunching_rate",
+    "bunching rate": "bunching_rate",
+    "travel time excess": "travel_time_excess",
+    "prediction gap": "prediction_gap",
+    "realized headway": "headway_ratio",
+}
+STATION_ENTITIES = {
+    "place-harsq": {
+        "name": "Harvard",
+        "aliases": ("harvard", "harvard square", "harvard station"),
+    },
+    "place-knncl": {
+        "name": "Kendall/MIT",
+        "aliases": (
+            "kendall",
+            "kendall mit",
+            "kendall square",
+            "kendall station",
+            "mit",
+        ),
+    },
+    "place-state": {
+        "name": "State",
+        "aliases": ("state", "state street", "state station"),
+    },
+}
 
 
 class TransitDataError(RuntimeError):
@@ -51,6 +87,83 @@ def _get(path: str, params: dict[str, Any] | None = None) -> dict[str, Any]:
         return response.json()
     except requests.RequestException as exc:
         raise TransitDataError(f"MBTA request failed: {exc}") from exc
+
+
+def normalize_station_name(value: str) -> str:
+    """Normalize punctuation and common station-name formatting."""
+    return " ".join(re.sub(r"[^a-z0-9]+", " ", value.casefold()).split())
+
+
+@lru_cache(maxsize=1)
+def subway_station_index() -> dict[str, dict[str, str]]:
+    """Build a normalized station-name index from MBTA's current stop metadata."""
+    response = _get(
+        "stops",
+        {
+            "filter[route]": ",".join(SUBWAY_ROUTES),
+            "page[limit]": 1000,
+        },
+    )
+    index: dict[str, dict[str, str]] = {}
+    for item in response.get("data", []):
+        attributes = item.get("attributes", {})
+        if attributes.get("location_type") != 1:
+            continue
+        stop_id = item.get("id")
+        name = attributes.get("name")
+        if not stop_id or not name:
+            continue
+        entity = {"canonical_stop_id": stop_id, "canonical_name": name}
+        index[normalize_station_name(name)] = entity
+        index[normalize_station_name(stop_id)] = entity
+    return index
+
+
+def resolve_station_entity(station: str) -> dict[str, str]:
+    """Resolve supported rider-facing aliases to a canonical MBTA place ID."""
+    requested = station.strip()
+    if requested in STATION_ENTITIES:
+        entity = STATION_ENTITIES[requested]
+        return {
+            "requested_station": requested,
+            "canonical_stop_id": requested,
+            "canonical_name": entity["name"],
+            "resolution_method": "canonical_id",
+        }
+    normalized = normalize_station_name(requested)
+    for stop_id, entity in STATION_ENTITIES.items():
+        if normalized in entity["aliases"]:
+            return {
+                "requested_station": requested,
+                "canonical_stop_id": stop_id,
+                "canonical_name": entity["name"],
+                "resolution_method": "alias",
+            }
+    try:
+        station_index = subway_station_index()
+    except TransitDataError:
+        station_index = {}
+    if normalized in station_index:
+        entity = station_index[normalized]
+        return {
+            "requested_station": requested,
+            **entity,
+            "resolution_method": "mbta_station_name",
+        }
+    fuzzy_match = get_close_matches(normalized, station_index, n=1, cutoff=0.86)
+    if fuzzy_match:
+        entity = station_index[fuzzy_match[0]]
+        return {
+            "requested_station": requested,
+            **entity,
+            "resolution_method": "fuzzy_mbta_station_name",
+        }
+    return {
+        "requested_station": requested,
+        "canonical_stop_id": requested,
+        "canonical_name": requested,
+        "resolution_method": "literal_fallback",
+    }
 
 
 def _relationship_id(resource: dict[str, Any], name: str) -> str | None:
@@ -286,18 +399,29 @@ def network_reliability(
 def station_headways(
     history: pd.DataFrame, station: str, line: str | None = None
 ) -> dict[str, Any]:
-    """Summarize headways at a stop ID or a case-insensitive stop-name match."""
+    """Resolve a station entity and summarize its realized headways."""
     data = _metric_frame(history)
     data = data[data["route_id"].isin(SUBWAY_ROUTES)]
     if line:
         data = data[data["route_id"].isin(LINE_GROUPS.get(line, (line,)))]
     stop_column = "parent_station" if "parent_station" in data.columns else "stop_id"
-    mask = data[stop_column].astype(str).str.contains(station, case=False, regex=False)
+    entity = resolve_station_entity(station)
+    canonical_stop_id = entity["canonical_stop_id"]
+    mask = data[stop_column].astype(str).str.casefold().eq(canonical_stop_id.casefold())
+    if not mask.any() and entity["resolution_method"] == "literal_fallback":
+        mask = data[stop_column].astype(str).str.contains(
+            station, case=False, regex=False
+        )
     selected = data[mask]
     if selected.empty:
-        return {"station": station, "error": "No matching station in the selected data."}
+        return {
+            **entity,
+            "line": line,
+            "error": "No matching station in the selected data.",
+        }
     return {
-        "station": station,
+        **entity,
+        "line": line,
         "matched_values": sorted(selected[stop_column].dropna().astype(str).unique())[:10],
         "observations": int(selected["headway_ratio"].count()),
         "median_headway_minutes": round(selected["observed_headway"].median() / 60, 2),
@@ -309,5 +433,7 @@ def station_headways(
 
 def metric_definition(metric: str | None = None) -> dict[str, str]:
     if metric:
-        return {metric: METRIC_DEFINITIONS.get(metric, "Unknown metric.")}
+        normalized = normalize_station_name(metric).replace("_", " ")
+        canonical = METRIC_ALIASES.get(normalized, metric)
+        return {canonical: METRIC_DEFINITIONS.get(canonical, "Unknown metric.")}
     return METRIC_DEFINITIONS

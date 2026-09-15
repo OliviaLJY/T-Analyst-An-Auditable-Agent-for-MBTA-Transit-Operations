@@ -2,16 +2,27 @@ from datetime import datetime, timedelta, timezone
 
 import pandas as pd
 
-from evaluate_agent import calls_match
+from evaluate_agent import calls_match, evidence_is_usable
 from transit_agent import TransitAnalyst
-from transit_data import live_line_status, network_reliability, station_headways
+from transit_data import (
+    live_line_status,
+    metric_definition,
+    network_reliability,
+    resolve_station_entity,
+    station_headways,
+)
 
 
 def history_fixture() -> pd.DataFrame:
     return pd.DataFrame(
         {
             "route_id": ["Red", "Red", "Orange", "Orange"],
-            "parent_station": ["Harvard", "Harvard", "State", "State"],
+            "parent_station": [
+                "place-harsq",
+                "place-harsq",
+                "place-state",
+                "place-state",
+            ],
             "headway_branch_seconds": [300, 900, 360, 180],
             "headway_trunk_seconds": [None, None, None, None],
             "scheduled_headway_branch": [600, 600, 360, 360],
@@ -67,10 +78,25 @@ def test_network_metrics_are_deterministic() -> None:
 
 
 def test_station_match_uses_parent_station_name() -> None:
-    result = station_headways(history_fixture(), "harv", line="Red")
-    assert result["matched_values"] == ["Harvard"]
+    result = station_headways(history_fixture(), "Harvard", line="Red")
+    assert result["matched_values"] == ["place-harsq"]
+    assert result["canonical_name"] == "Harvard"
+    assert result["canonical_stop_id"] == "place-harsq"
     assert result["observations"] == 2
     assert result["median_headway_minutes"] == 10.0
+
+
+def test_station_aliases_resolve_to_canonical_mbta_ids() -> None:
+    assert resolve_station_entity("Harvard Square")["canonical_stop_id"] == "place-harsq"
+    assert resolve_station_entity("Kendall Square")["canonical_stop_id"] == "place-knncl"
+    assert resolve_station_entity("MIT")["canonical_stop_id"] == "place-knncl"
+    assert resolve_station_entity("State Street")["canonical_stop_id"] == "place-state"
+
+
+def test_metric_aliases_resolve_to_known_definitions() -> None:
+    result = metric_definition("unusually long gap")
+    assert "gap_rate" in result
+    assert result["gap_rate"] != "Unknown metric."
 
 
 def test_live_status_keeps_prediction_caveat() -> None:
@@ -119,3 +145,22 @@ def test_eval_call_matching_ignores_order_and_allows_optional_arguments() -> Non
         },
     ]
     assert calls_match(expected, selected) is True
+
+
+def test_eval_rejects_tool_errors_and_checks_canonical_entity() -> None:
+    failed = [{"result": {"error": "No matching station."}}]
+    assert evidence_is_usable(failed) is False
+    resolved = [
+        {
+            "result": {
+                "canonical_stop_id": "place-knncl",
+                "observations": 42,
+            }
+        }
+    ]
+    assert evidence_is_usable(
+        resolved, {"canonical_stop_id": "place-knncl"}
+    ) is True
+    assert evidence_is_usable(
+        resolved, {"canonical_stop_id": "place-harsq"}
+    ) is False

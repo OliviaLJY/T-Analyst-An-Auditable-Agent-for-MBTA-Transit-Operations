@@ -57,6 +57,32 @@ def calls_match(
     return not remaining
 
 
+def evidence_is_usable(
+    evidence: list[dict[str, Any]], expected_result: dict[str, Any] | None = None
+) -> bool:
+    """Reject empty/error evidence and optionally verify canonical result fields."""
+    results = [item.get("result") for item in evidence]
+    if not results:
+        return False
+    for result in results:
+        if isinstance(result, dict) and result.get("error"):
+            return False
+        if isinstance(result, (list, dict)) and not result:
+            return False
+        if "unknown metric" in json.dumps(result, ensure_ascii=False).casefold():
+            return False
+    if expected_result:
+        return any(
+            isinstance(result, dict)
+            and all(
+                key in result and normalized(result[key]) == normalized(value)
+                for key, value in expected_result.items()
+            )
+            for result in results
+        )
+    return True
+
+
 def compact_calls(calls: list[dict[str, Any]]) -> str:
     return "; ".join(
         f"{call['name']}({json.dumps(call.get('arguments', {}), ensure_ascii=False)})"
@@ -81,6 +107,7 @@ def write_results(payload: dict[str, Any], stem: str) -> None:
         "expected_calls",
         "selected_calls",
         "tool_selection_correct",
+        "result_valid",
         "citation_valid",
         "fallback_triggered",
         "fallback_reason",
@@ -108,14 +135,18 @@ def write_results(payload: dict[str, Any], stem: str) -> None:
             f"- Valid final citations: {summary['citation_valid']}/"
             f"{summary['total']} ({summary['citation_valid_rate']:.1%})"
         ),
+        (
+            f"- Usable tool results: {summary['result_valid']}/"
+            f"{summary['total']} ({summary['result_valid_rate']:.1%})"
+        ),
         f"- Fallbacks triggered: {summary['fallback_triggered']}/{summary['total']}",
         (
             f"- End-to-end pass: {summary['passed']}/{summary['total']} "
-            "(correct tools + valid citations + no fallback)"
+            "(correct tools + usable results + valid citations + no fallback)"
         ),
         "",
-        "| ID | Category | Expected tools | Selected tools | Tool | Citation | Fallback | Pass |",
-        "|---|---|---|---|---:|---:|---:|---:|",
+        "| ID | Category | Expected tools | Selected tools | Tool | Result | Citation | Fallback | Pass |",
+        "|---|---|---|---|---:|---:|---:|---:|---:|",
     ]
     for row in payload["results"]:
         expected_tools = "<br>".join(
@@ -130,7 +161,8 @@ def write_results(payload: dict[str, Any], stem: str) -> None:
         lines.append(
             f"| {row['id']} | {row['category']} | {expected_tools} | "
             f"{selected_tools} | {mark(row['tool_selection_correct'])} | "
-            f"{mark(row['citation_valid'])} | {mark(row['fallback_triggered'])} | "
+            f"{mark(row['result_valid'])} | {mark(row['citation_valid'])} | "
+            f"{mark(row['fallback_triggered'])} | "
             f"{mark(row['passed'])} |"
         )
     lines.extend(
@@ -178,6 +210,9 @@ def run(force_fallback: bool, limit: int | None) -> dict[str, Any]:
                 call.model_dump() for call in result.plan.calls
             ]
             tool_correct = calls_match(case["expected_calls"], selected_calls)
+            result_valid = evidence_is_usable(
+                result.evidence, case.get("expected_result")
+            )
             citation_valid = result.citation_valid
             fallback_triggered = result.fallback_triggered
             fallback_reason = result.fallback_reason or ""
@@ -185,6 +220,7 @@ def run(force_fallback: bool, limit: int | None) -> dict[str, Any]:
             answer = result.answer
         except Exception as exc:
             tool_correct = False
+            result_valid = False
             citation_valid = False
             fallback_triggered = False
             fallback_reason = ""
@@ -192,6 +228,7 @@ def run(force_fallback: bool, limit: int | None) -> dict[str, Any]:
             answer = ""
         passed = (
             tool_correct
+            and result_valid
             and citation_valid
             and not fallback_triggered
             and not error
@@ -206,6 +243,7 @@ def run(force_fallback: bool, limit: int | None) -> dict[str, Any]:
                 "expected_calls_raw": case["expected_calls"],
                 "selected_calls_raw": selected_calls,
                 "tool_selection_correct": tool_correct,
+                "result_valid": result_valid,
                 "citation_valid": citation_valid,
                 "fallback_triggered": fallback_triggered,
                 "fallback_reason": fallback_reason,
@@ -218,6 +256,7 @@ def run(force_fallback: bool, limit: int | None) -> dict[str, Any]:
     total = len(results)
     count = lambda field: sum(bool(row[field]) for row in results)
     tool_count = count("tool_selection_correct")
+    result_count = count("result_valid")
     citation_count = count("citation_valid")
     payload = {
         "run_at": datetime.now(timezone.utc).isoformat(),
@@ -227,6 +266,8 @@ def run(force_fallback: bool, limit: int | None) -> dict[str, Any]:
             "total": total,
             "tool_selection_correct": tool_count,
             "tool_selection_rate": tool_count / total if total else 0,
+            "result_valid": result_count,
+            "result_valid_rate": result_count / total if total else 0,
             "citation_valid": citation_count,
             "citation_valid_rate": citation_count / total if total else 0,
             "fallback_triggered": count("fallback_triggered"),
@@ -262,6 +303,7 @@ def main() -> None:
     summary = payload["summary"]
     print(
         f"Tool selection {summary['tool_selection_correct']}/{summary['total']} · "
+        f"results {summary['result_valid']}/{summary['total']} · "
         f"citations {summary['citation_valid']}/{summary['total']} · "
         f"fallbacks {summary['fallback_triggered']}/{summary['total']} · "
         f"passes {summary['passed']}/{summary['total']}"

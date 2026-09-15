@@ -64,6 +64,7 @@
         "arguments": {"station": "Harvard", "line": "Red"}
       }
     ],
+    "expected_result": {"canonical_stop_id": "place-harsq"},
     "category": "historical station"
   },
   {
@@ -75,6 +76,7 @@
         "arguments": {"station": "Kendall/MIT", "line": "Red"}
       }
     ],
+    "expected_result": {"canonical_stop_id": "place-knncl"},
     "category": "historical station"
   },
   {
@@ -86,6 +88,7 @@
         "arguments": {"station": "State", "line": "Orange"}
       }
     ],
+    "expected_result": {"canonical_stop_id": "place-state"},
     "category": "historical station"
   },
   {

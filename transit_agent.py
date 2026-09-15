@@ -311,7 +311,11 @@ Question: {question}"""
                     "source": (
                         "MBTA V3 API"
                         if call.name == "live_line_status"
-                        else "MBTA LAMP daily subway performance data"
+                        else (
+                            "MBTA LAMP performance + MBTA V3 station metadata"
+                            if call.name == "station_headways"
+                            else "MBTA LAMP daily subway performance data"
+                        )
                     ),
                     "result": result,
                 }
@@ -353,6 +357,8 @@ Question: {question}"""
 Lead with the finding, explain operational meaning, and state limitations.
 Every numeric claim must cite an evidence ID exactly like [E1].
 Do not call prediction gaps realized headways. Be concise.
+Do not equate a realized headway with an individual rider's wait. Describe it as
+train spacing unless passenger arrival or wait-time evidence is explicitly provided.
 Question: {question}
 Interpretation: {plan.interpreted_question}
 Evidence: {json.dumps(evidence, ensure_ascii=False, default=str)}"""

@@ -61,6 +61,13 @@ A live prediction gap is the interval between consecutive future predictions
 for one route, stop, and direction. I keep it separate from historical
 headways: a prediction can change and is not proof of an actual passenger wait.
 
+LAMP's exported `parent_station` values are MBTA place IDs rather than
+rider-facing names. Before a station query runs, the app resolves common aliases
+such as Harvard Square, Kendall, Kendall/MIT, Kendall Square, MIT, State, and
+State Street to canonical IDs. For other subway stations, it uses the MBTA V3
+stop index and a conservative fuzzy match. The evidence records the requested
+name, canonical name, place ID, and resolution method.
+
 When a user asks a question, Parley GPT-5.5 first returns a small JSON plan with
 one to three tool calls. Pydantic checks the tool names, arguments, route names,
 and required fields before anything runs. The selected Python tools then return
@@ -118,9 +125,10 @@ pytest -q
 The repository includes a fixed, all-English set of 15 questions covering
 network and line reliability, station headways, live status, metric
 definitions, a multi-tool comparison, and questions that ask for multiple
-metric definitions. The evaluation checks three behaviors:
+metric definitions. The evaluation checks four behaviors:
 
 - whether the planner selected the expected tool and required arguments;
+- whether each tool returned usable evidence rather than an empty/error result;
 - whether the final answer cites only evidence IDs from the same run;
 - whether deterministic fallback behavior was triggered.
 
@@ -147,6 +155,7 @@ definition tools for questions that explicitly ask for them.
 The second [GPT-5.5 evaluation](evaluation/results-gpt-5.5.md) achieved:
 
 - correct tool selection: 15/15;
+- usable tool results: 15/15;
 - valid final citations: 15/15;
 - fallbacks triggered: 0/15;
 - end-to-end pass: 15/15.
