@@ -131,5 +131,50 @@
       {"name": "metric_definition", "arguments": {}}
     ],
     "category": "methodology"
+  },
+  {
+    "id": "station-harvard-square",
+    "question": "How were realized Red Line headways at Harvard Square?",
+    "expected_calls": [
+      {"name": "station_headways", "arguments": {"line": "Red"}}
+    ],
+    "expected_result": {"canonical_stop_id": "place-harsq"},
+    "category": "station alias"
+  },
+  {
+    "id": "station-kendall-square",
+    "question": "Show recent Red Line train spacing at Kendall Square.",
+    "expected_calls": [
+      {"name": "station_headways", "arguments": {"line": "Red"}}
+    ],
+    "expected_result": {"canonical_stop_id": "place-knncl"},
+    "category": "station alias"
+  },
+  {
+    "id": "station-mit",
+    "question": "What were realized train intervals near MIT on the Red Line?",
+    "expected_calls": [
+      {"name": "station_headways", "arguments": {"line": "Red"}}
+    ],
+    "expected_result": {"canonical_stop_id": "place-knncl"},
+    "category": "station alias"
+  },
+  {
+    "id": "station-state-street",
+    "question": "Did the Orange Line have many long gaps at State Street?",
+    "expected_calls": [
+      {"name": "station_headways", "arguments": {"line": "Orange"}}
+    ],
+    "expected_result": {"canonical_stop_id": "place-state"},
+    "category": "station alias"
+  },
+  {
+    "id": "station-park-street",
+    "question": "Summarize recent Red Line headways at Park Street.",
+    "expected_calls": [
+      {"name": "station_headways", "arguments": {"line": "Red"}}
+    ],
+    "expected_result": {"canonical_stop_id": "place-pktrm"},
+    "category": "dynamic station index"
   }
 ]

@@ -1,16 +1,16 @@
 {
-  "run_at": "2026-09-15T03:15:04.440246+00:00",
+  "run_at": "2026-09-15T03:22:07.958548+00:00",
   "mode": "fallback baseline",
   "model": "deterministic-fallback",
   "summary": {
-    "total": 15,
-    "tool_selection_correct": 15,
+    "total": 20,
+    "tool_selection_correct": 20,
     "tool_selection_rate": 1.0,
-    "result_valid": 15,
+    "result_valid": 20,
     "result_valid_rate": 1.0,
-    "citation_valid": 15,
+    "citation_valid": 20,
     "citation_valid_rate": 1.0,
-    "fallback_triggered": 15,
+    "fallback_triggered": 20,
     "passed": 0,
     "errors": 0
   },
@@ -171,7 +171,7 @@
       "fallback_reason": "no_api_key",
       "passed": false,
       "error": "",
-      "answer": "Parley is unavailable, so this is a deterministic evidence summary.\n\n[E1] {\"line\": \"Orange\", \"as_of\": \"2026-09-15T03:15:02.877449+00:00\", \"vehicle_count\": 10, \"active_alert_count\": 3, \"alerts\": [{\"alert_id\": \"1001814\", \"effect\": \"STATION_ISSUE\", \"header\": \"The platform at Jackson Square is undergoing renovations to improve safety and accessibility. Sections of the platform are unlevel, which may make it difficult for some riders to board and exit trains.\", \"routes\": [\"Orange\"], \"updated_at\": \"2026-07-21T20:49:43-04:00\"}, {\"alert_id\": \"1001861\", \"effect\": \"STATION_ISSUE\", \"header\": \"The stairway connecting the Jackson Square lobby and the south end of the platform is closed until winter 2026. Use the stairway at the north end of the platform. This closure is for th"
+      "answer": "Parley is unavailable, so this is a deterministic evidence summary.\n\n[E1] {\"line\": \"Orange\", \"as_of\": \"2026-09-15T03:22:05.753640+00:00\", \"vehicle_count\": 10, \"active_alert_count\": 3, \"alerts\": [{\"alert_id\": \"1001814\", \"effect\": \"STATION_ISSUE\", \"header\": \"The platform at Jackson Square is undergoing renovations to improve safety and accessibility. Sections of the platform are unlevel, which may make it difficult for some riders to board and exit trains.\", \"routes\": [\"Orange\"], \"updated_at\": \"2026-07-21T20:49:43-04:00\"}, {\"alert_id\": \"1001861\", \"effect\": \"STATION_ISSUE\", \"header\": \"The stairway connecting the Jackson Square lobby and the south end of the platform is closed until winter 2026. Use the stairway at the north end of the platform. This closure is for th"
     },
     {
       "id": "live-blue",
@@ -203,7 +203,7 @@
       "fallback_reason": "no_api_key",
       "passed": false,
       "error": "",
-      "answer": "Parley is unavailable, so this is a deterministic evidence summary.\n\n[E1] {\"line\": \"Blue\", \"as_of\": \"2026-09-15T03:15:02.877449+00:00\", \"vehicle_count\": 6, \"active_alert_count\": 1, \"alerts\": [{\"alert_id\": \"1028255\", \"effect\": \"DELAY\", \"header\": \"Blue Line: All trains will operate on the outbound/eastbound track between Wonderland and Revere Beach the weekend of September 26 – 27, for switch work. \", \"routes\": [\"Blue\"], \"updated_at\": \"2026-08-19T08:42:11-04:00\"}], \"largest_prediction_gaps\": [{\"route_id\": \"Blue\", \"stop_name\": \"Bowdoin\", \"direction_id\": 1, \"gap_minutes\": 10.0}, {\"route_id\": \"Blue\", \"stop_name\": \"Government Center\", \"direction_id\": 1, \"gap_minutes\": 10.0}, {\"route_id\": \"Blue\", \"stop_name\": \"State\", \"direction_id\": 1, \"gap_minutes\": 10.0}, {\"route_id\":"
+      "answer": "Parley is unavailable, so this is a deterministic evidence summary.\n\n[E1] {\"line\": \"Blue\", \"as_of\": \"2026-09-15T03:22:05.753640+00:00\", \"vehicle_count\": 6, \"active_alert_count\": 1, \"alerts\": [{\"alert_id\": \"1028255\", \"effect\": \"DELAY\", \"header\": \"Blue Line: All trains will operate on the outbound/eastbound track between Wonderland and Revere Beach the weekend of September 26 – 27, for switch work. \", \"routes\": [\"Blue\"], \"updated_at\": \"2026-08-19T08:42:11-04:00\"}], \"largest_prediction_gaps\": [{\"route_id\": \"Blue\", \"stop_name\": \"Bowdoin\", \"direction_id\": 1, \"gap_minutes\": 10.0}, {\"route_id\": \"Blue\", \"stop_name\": \"Wonderland\", \"direction_id\": 0, \"gap_minutes\": 10.0}, {\"route_id\": \"Blue\", \"stop_name\": \"Government Center\", \"direction_id\": 1, \"gap_minutes\": 10.0}, {\"route"
     },
     {
       "id": "live-network",
@@ -233,7 +233,7 @@
       "fallback_reason": "no_api_key",
       "passed": false,
       "error": "",
-      "answer": "Parley is unavailable, so this is a deterministic evidence summary.\n\n[E1] {\"line\": \"Network\", \"as_of\": \"2026-09-15T03:15:02.877449+00:00\", \"vehicle_count\": 80, \"active_alert_count\": 9, \"alerts\": [{\"alert_id\": \"1001814\", \"effect\": \"STATION_ISSUE\", \"header\": \"The platform at Jackson Square is undergoing renovations to improve safety and accessibility. Sections of the platform are unlevel, which may make it difficult for some riders to board and exit trains.\", \"routes\": [\"Orange\"], \"updated_at\": \"2026-07-21T20:49:43-04:00\"}, {\"alert_id\": \"1001861\", \"effect\": \"STATION_ISSUE\", \"header\": \"The stairway connecting the Jackson Square lobby and the south end of the platform is closed until winter 2026. Use the stairway at the north end of the platform. This closure is for t"
+      "answer": "Parley is unavailable, so this is a deterministic evidence summary.\n\n[E1] {\"line\": \"Network\", \"as_of\": \"2026-09-15T03:22:05.753640+00:00\", \"vehicle_count\": 80, \"active_alert_count\": 9, \"alerts\": [{\"alert_id\": \"1001814\", \"effect\": \"STATION_ISSUE\", \"header\": \"The platform at Jackson Square is undergoing renovations to improve safety and accessibility. Sections of the platform are unlevel, which may make it difficult for some riders to board and exit trains.\", \"routes\": [\"Orange\"], \"updated_at\": \"2026-07-21T20:49:43-04:00\"}, {\"alert_id\": \"1001861\", \"effect\": \"STATION_ISSUE\", \"header\": \"The stairway connecting the Jackson Square lobby and the south end of the platform is closed until winter 2026. Use the stairway at the north end of the platform. This closure is for t"
     },
     {
       "id": "station-harvard",
@@ -436,7 +436,7 @@
       "fallback_reason": "no_api_key",
       "passed": false,
       "error": "",
-      "answer": "Parley is unavailable, so this is a deterministic evidence summary.\n\n[E1] {\"line\": \"Orange\", \"as_of\": \"2026-09-15T03:15:02.877449+00:00\", \"vehicle_count\": 10, \"active_alert_count\": 3, \"alerts\": [{\"alert_id\": \"1001814\", \"effect\": \"STATION_ISSUE\", \"header\": \"The platform at Jackson Square is undergoing renovations to improve safety and accessibility. Sections of the platform are unlevel, which may make it difficult for some riders to board and exit trains.\", \"routes\": [\"Orange\"], \"updated_at\": \"2026-07-21T20:49:43-04:00\"}, {\"alert_id\": \"1001861\", \"effect\": \"STATION_ISSUE\", \"header\": \"The stairway connecting the Jackson Square lobby and the south end of the platform is closed until winter 2026. Use the stairway at the north end of the platform. This closure is for th\n\n[E2] Orange: gap rate 0.068, based on 38602 observations."
+      "answer": "Parley is unavailable, so this is a deterministic evidence summary.\n\n[E1] {\"line\": \"Orange\", \"as_of\": \"2026-09-15T03:22:05.753640+00:00\", \"vehicle_count\": 10, \"active_alert_count\": 3, \"alerts\": [{\"alert_id\": \"1001814\", \"effect\": \"STATION_ISSUE\", \"header\": \"The platform at Jackson Square is undergoing renovations to improve safety and accessibility. Sections of the platform are unlevel, which may make it difficult for some riders to board and exit trains.\", \"routes\": [\"Orange\"], \"updated_at\": \"2026-07-21T20:49:43-04:00\"}, {\"alert_id\": \"1001861\", \"effect\": \"STATION_ISSUE\", \"header\": \"The stairway connecting the Jackson Square lobby and the south end of the platform is closed until winter 2026. Use the stairway at the north end of the platform. This closure is for th\n\n[E2] Orange: gap rate 0.068, based on 38602 observations."
     },
     {
       "id": "live-red-notices",
@@ -468,7 +468,7 @@
       "fallback_reason": "no_api_key",
       "passed": false,
       "error": "",
-      "answer": "Parley is unavailable, so this is a deterministic evidence summary.\n\n[E1] {\"line\": \"Red\", \"as_of\": \"2026-09-15T03:15:02.877449+00:00\", \"vehicle_count\": 15, \"active_alert_count\": 1, \"alerts\": [{\"alert_id\": \"1028254\", \"effect\": \"SHUTTLE\", \"header\": \"Red Line Ashmont Branch: Critical bridge work will be taking place the weekend of September 19-20. Accessible shuttle buses will replace service between JFK/UMass and Ashmont.\", \"routes\": [\"Red\"], \"updated_at\": \"2026-09-14T11:00:22-04:00\"}], \"largest_prediction_gaps\": [{\"route_id\": \"Red\", \"stop_name\": \"JFK/UMass\", \"direction_id\": 0, \"gap_minutes\": 24.2}, {\"route_id\": \"Red\", \"stop_name\": \"North Quincy\", \"direction_id\": 0, \"gap_minutes\": 24.2}, {\"route_id\": \"Red\", \"stop_name\": \"Wollaston\", \"direction_id\": 0, \"gap_minutes\":"
+      "answer": "Parley is unavailable, so this is a deterministic evidence summary.\n\n[E1] {\"line\": \"Red\", \"as_of\": \"2026-09-15T03:22:05.753640+00:00\", \"vehicle_count\": 15, \"active_alert_count\": 1, \"alerts\": [{\"alert_id\": \"1028254\", \"effect\": \"SHUTTLE\", \"header\": \"Red Line Ashmont Branch: Critical bridge work will be taking place the weekend of September 19-20. Accessible shuttle buses will replace service between JFK/UMass and Ashmont.\", \"routes\": [\"Red\"], \"updated_at\": \"2026-09-14T11:00:22-04:00\"}], \"largest_prediction_gaps\": [{\"route_id\": \"Red\", \"stop_name\": \"North Quincy\", \"direction_id\": 0, \"gap_minutes\": 24.8}, {\"route_id\": \"Red\", \"stop_name\": \"Wollaston\", \"direction_id\": 0, \"gap_minutes\": 24.8}, {\"route_id\": \"Red\", \"stop_name\": \"Quincy Center\", \"direction_id\": 0, \"gap_minut"
     },
     {
       "id": "define-two-metrics",
@@ -497,6 +497,171 @@
       "passed": false,
       "error": "",
       "answer": "Parley is unavailable, so this is a deterministic evidence summary.\n\n[E1] {\"headway_ratio\": \"Observed departure headway divided by scheduled headway.\", \"gap_rate\": \"Share of observed headways greater than 1.5× the scheduled headway.\", \"bunching_rate\": \"Share of observed headways below 0.5× the scheduled headway.\", \"travel_time_excess\": \"Observed inter-station travel time minus scheduled travel time.\", \"prediction_gap\": \"Minutes between consecutive future predictions at one stop and direction. This is not a realized headway.\"}"
+    },
+    {
+      "id": "station-harvard-square",
+      "category": "station alias",
+      "question": "How were realized Red Line headways at Harvard Square?",
+      "expected_calls": "station_headways({\"line\": \"Red\"})",
+      "selected_calls": "station_headways({\"station\": \"Harvard Square\", \"line\": \"Red\"})",
+      "expected_calls_raw": [
+        {
+          "name": "station_headways",
+          "arguments": {
+            "line": "Red"
+          }
+        }
+      ],
+      "selected_calls_raw": [
+        {
+          "name": "station_headways",
+          "arguments": {
+            "station": "Harvard Square",
+            "line": "Red"
+          },
+          "reason": "The question asks about realized headways at a station."
+        }
+      ],
+      "tool_selection_correct": true,
+      "result_valid": true,
+      "citation_valid": true,
+      "fallback_triggered": true,
+      "fallback_reason": "no_api_key",
+      "passed": false,
+      "error": "",
+      "answer": "Parley is unavailable, so this is a deterministic evidence summary.\n\n[E1] {\"requested_station\": \"Harvard Square\", \"canonical_stop_id\": \"place-harsq\", \"canonical_name\": \"Harvard\", \"resolution_method\": \"alias\", \"line\": \"Red\", \"matched_values\": [\"place-harsq\"], \"observations\": 2918, \"median_headway_minutes\": 10.65, \"p90_headway_minutes\": 16.15, \"gap_rate\": 0.095, \"bunching_rate\": 0.054}"
+    },
+    {
+      "id": "station-kendall-square",
+      "category": "station alias",
+      "question": "Show recent Red Line train spacing at Kendall Square.",
+      "expected_calls": "station_headways({\"line\": \"Red\"})",
+      "selected_calls": "station_headways({\"station\": \"Kendall Square\", \"line\": \"Red\"})",
+      "expected_calls_raw": [
+        {
+          "name": "station_headways",
+          "arguments": {
+            "line": "Red"
+          }
+        }
+      ],
+      "selected_calls_raw": [
+        {
+          "name": "station_headways",
+          "arguments": {
+            "station": "Kendall Square",
+            "line": "Red"
+          },
+          "reason": "The question asks about realized headways at a station."
+        }
+      ],
+      "tool_selection_correct": true,
+      "result_valid": true,
+      "citation_valid": true,
+      "fallback_triggered": true,
+      "fallback_reason": "no_api_key",
+      "passed": false,
+      "error": "",
+      "answer": "Parley is unavailable, so this is a deterministic evidence summary.\n\n[E1] {\"requested_station\": \"Kendall Square\", \"canonical_stop_id\": \"place-knncl\", \"canonical_name\": \"Kendall/MIT\", \"resolution_method\": \"alias\", \"line\": \"Red\", \"matched_values\": [\"place-knncl\"], \"observations\": 2917, \"median_headway_minutes\": 10.55, \"p90_headway_minutes\": 16.18, \"gap_rate\": 0.096, \"bunching_rate\": 0.049}"
+    },
+    {
+      "id": "station-mit",
+      "category": "station alias",
+      "question": "What were realized train intervals near MIT on the Red Line?",
+      "expected_calls": "station_headways({\"line\": \"Red\"})",
+      "selected_calls": "station_headways({\"station\": \"MIT\", \"line\": \"Red\"})",
+      "expected_calls_raw": [
+        {
+          "name": "station_headways",
+          "arguments": {
+            "line": "Red"
+          }
+        }
+      ],
+      "selected_calls_raw": [
+        {
+          "name": "station_headways",
+          "arguments": {
+            "station": "MIT",
+            "line": "Red"
+          },
+          "reason": "The question asks about realized headways at a station."
+        }
+      ],
+      "tool_selection_correct": true,
+      "result_valid": true,
+      "citation_valid": true,
+      "fallback_triggered": true,
+      "fallback_reason": "no_api_key",
+      "passed": false,
+      "error": "",
+      "answer": "Parley is unavailable, so this is a deterministic evidence summary.\n\n[E1] {\"requested_station\": \"MIT\", \"canonical_stop_id\": \"place-knncl\", \"canonical_name\": \"Kendall/MIT\", \"resolution_method\": \"alias\", \"line\": \"Red\", \"matched_values\": [\"place-knncl\"], \"observations\": 2917, \"median_headway_minutes\": 10.55, \"p90_headway_minutes\": 16.18, \"gap_rate\": 0.096, \"bunching_rate\": 0.049}"
+    },
+    {
+      "id": "station-state-street",
+      "category": "station alias",
+      "question": "Did the Orange Line have many long gaps at State Street?",
+      "expected_calls": "station_headways({\"line\": \"Orange\"})",
+      "selected_calls": "station_headways({\"station\": \"State Street\", \"line\": \"Orange\"})",
+      "expected_calls_raw": [
+        {
+          "name": "station_headways",
+          "arguments": {
+            "line": "Orange"
+          }
+        }
+      ],
+      "selected_calls_raw": [
+        {
+          "name": "station_headways",
+          "arguments": {
+            "station": "State Street",
+            "line": "Orange"
+          },
+          "reason": "The question asks about realized headways at a station."
+        }
+      ],
+      "tool_selection_correct": true,
+      "result_valid": true,
+      "citation_valid": true,
+      "fallback_triggered": true,
+      "fallback_reason": "no_api_key",
+      "passed": false,
+      "error": "",
+      "answer": "Parley is unavailable, so this is a deterministic evidence summary.\n\n[E1] {\"requested_station\": \"State Street\", \"canonical_stop_id\": \"place-state\", \"canonical_name\": \"State\", \"resolution_method\": \"alias\", \"line\": \"Orange\", \"matched_values\": [\"place-state\"], \"observations\": 2597, \"median_headway_minutes\": 6.18, \"p90_headway_minutes\": 9.0, \"gap_rate\": 0.062, \"bunching_rate\": 0.04}"
+    },
+    {
+      "id": "station-park-street",
+      "category": "dynamic station index",
+      "question": "Summarize recent Red Line headways at Park Street.",
+      "expected_calls": "station_headways({\"line\": \"Red\"})",
+      "selected_calls": "station_headways({\"station\": \"Park Street\", \"line\": \"Red\"})",
+      "expected_calls_raw": [
+        {
+          "name": "station_headways",
+          "arguments": {
+            "line": "Red"
+          }
+        }
+      ],
+      "selected_calls_raw": [
+        {
+          "name": "station_headways",
+          "arguments": {
+            "station": "Park Street",
+            "line": "Red"
+          },
+          "reason": "The question asks about realized headways at a station."
+        }
+      ],
+      "tool_selection_correct": true,
+      "result_valid": true,
+      "citation_valid": true,
+      "fallback_triggered": true,
+      "fallback_reason": "no_api_key",
+      "passed": false,
+      "error": "",
+      "answer": "Parley is unavailable, so this is a deterministic evidence summary.\n\n[E1] {\"requested_station\": \"Park Street\", \"canonical_stop_id\": \"place-pktrm\", \"canonical_name\": \"Park Street\", \"resolution_method\": \"mbta_station_name\", \"line\": \"Red\", \"matched_values\": [\"place-pktrm\"], \"observations\": 1457, \"median_headway_minutes\": 10.47, \"p90_headway_minutes\": 16.37, \"gap_rate\": 0.099, \"bunching_rate\": 0.045}"
     }
   ]
 }

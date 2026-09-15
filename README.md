@@ -122,7 +122,7 @@ pytest -q
 
 ## Agent evaluation
 
-The repository includes a fixed, all-English set of 15 questions covering
+The repository includes a fixed, all-English set of 20 questions covering
 network and line reliability, station headways, live status, metric
 definitions, a multi-tool comparison, and questions that ask for multiple
 metric definitions. The evaluation checks four behaviors:
@@ -138,27 +138,28 @@ Run the GPT-5.5 evaluation from a shell with the Parley key:
 python evaluate_agent.py
 ```
 
-This makes 15 planning calls and 15 answer calls, then writes CSV, JSON, and
+This makes 20 planning calls and 20 answer calls, then writes CSV, JSON, and
 Markdown results under `evaluation/`. To evaluate no-key behavior instead:
 
 ```bash
 python evaluate_agent.py --force-fallback
 ```
 
-In the first GPT-5.5 run, required evidence citations were valid for 15/15
-questions and no fallback was triggered, but strict tool selection was correct
-for only 9/15. The model usually selected the right primary tool and then added
-an unnecessary `metric_definition` or live-status call. I revised the planner
-prompt to require the smallest sufficient plan and to reserve live and
-definition tools for questions that explicitly ask for them.
+In the first 15-question GPT-5.5 development run, required evidence citations
+were valid for 15/15 questions and no fallback was triggered, but strict tool
+selection was correct for only 9/15. The model usually selected the right
+primary tool and then added an unnecessary `metric_definition` or live-status
+call. I revised the planner prompt to require the smallest sufficient plan and
+to reserve live and definition tools for questions that explicitly ask for
+them.
 
-The second [GPT-5.5 evaluation](evaluation/results-gpt-5.5.md) achieved:
+The expanded [GPT-5.5 evaluation](evaluation/results-gpt-5.5.md) achieved:
 
-- correct tool selection: 15/15;
-- usable tool results: 15/15;
-- valid final citations: 15/15;
-- fallbacks triggered: 0/15;
-- end-to-end pass: 15/15.
+- correct tool selection: 20/20;
+- usable tool results: 20/20;
+- valid final citations: 20/20;
+- fallbacks triggered: 0/20;
+- end-to-end pass: 20/20.
 
 This is a small development evaluation, not a held-out benchmark: I used an
 earlier run's failures to improve the prompt, then reran the fixed suite. Its
@@ -166,9 +167,9 @@ value is as a repeatable regression check and a concrete record of what the
 current agent does.
 
 The committed [fallback baseline](evaluation/results-fallback.md) also selects
-the expected tools for 15/15 questions and returns valid citations for 15/15.
-All rows correctly report that fallback was used, so the fallback run has zero
-full-agent passes by design.
+the expected tools for 20/20 questions, returns usable results for 20/20, and
+returns valid citations for 20/20. All rows correctly report that fallback was
+used, so the fallback run has zero full-agent passes by design.
 
 ## Data and resources
 

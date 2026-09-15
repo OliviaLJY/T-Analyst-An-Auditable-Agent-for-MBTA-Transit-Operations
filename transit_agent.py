@@ -137,10 +137,15 @@ class TransitAnalyst:
             None,
         )
         station_aliases = {
+            "harvard square": "Harvard Square",
             "harvard": "Harvard",
             "kendall/mit": "Kendall/MIT",
+            "kendall square": "Kendall Square",
             "kendall": "Kendall/MIT",
+            "state street": "State Street",
             "state": "State",
+            "park street": "Park Street",
+            "mit": "MIT",
         }
         station = next(
             (value for key, value in station_aliases.items() if key in lower), None

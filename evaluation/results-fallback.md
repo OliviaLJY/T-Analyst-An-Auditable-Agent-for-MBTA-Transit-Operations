@@ -1,13 +1,13 @@
 # Agent Evaluation — fallback baseline
 
-- Run time: `2026-09-15T03:15:04.440246+00:00`
+- Run time: `2026-09-15T03:22:07.958548+00:00`
 - Model: `deterministic-fallback`
-- Questions: 15
-- Correct tool selection: 15/15 (100.0%)
-- Valid final citations: 15/15 (100.0%)
-- Usable tool results: 15/15 (100.0%)
-- Fallbacks triggered: 15/15
-- End-to-end pass: 0/15 (correct tools + usable results + valid citations + no fallback)
+- Questions: 20
+- Correct tool selection: 20/20 (100.0%)
+- Valid final citations: 20/20 (100.0%)
+- Usable tool results: 20/20 (100.0%)
+- Fallbacks triggered: 20/20
+- End-to-end pass: 0/20 (correct tools + usable results + valid citations + no fallback)
 
 | ID | Category | Expected tools | Selected tools | Tool | Result | Citation | Fallback | Pass |
 |---|---|---|---|---:|---:|---:|---:|---:|
@@ -26,6 +26,11 @@
 | compare-orange | multi-tool | live_line_status<br>network_reliability | live_line_status<br>network_reliability | Yes | Yes | Yes | Yes | No |
 | live-red-notices | live line | live_line_status | live_line_status | Yes | Yes | Yes | Yes | No |
 | define-two-metrics | methodology | metric_definition | metric_definition | Yes | Yes | Yes | Yes | No |
+| station-harvard-square | station alias | station_headways | station_headways | Yes | Yes | Yes | Yes | No |
+| station-kendall-square | station alias | station_headways | station_headways | Yes | Yes | Yes | Yes | No |
+| station-mit | station alias | station_headways | station_headways | Yes | Yes | Yes | Yes | No |
+| station-state-street | station alias | station_headways | station_headways | Yes | Yes | Yes | Yes | No |
+| station-park-street | dynamic station index | station_headways | station_headways | Yes | Yes | Yes | Yes | No |
 
 Tool-call order is ignored. Expected arguments must appear in the selected call; the planner may add an optional supported argument.
 
