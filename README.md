@@ -11,6 +11,8 @@ interface. Its main design goal is auditability: each answer can be traced to
 the tool call, parameters, data source, timestamp, and evidence used to produce
 it.
 
+**Demo video:** [Watch the T-Analyst walkthrough on Google Drive](https://drive.google.com/file/d/1lpgUZeL4tZJDNT-jjlmzlcps4eFYsN3B/view?usp=sharing)
+
 ## Why this is useful
 
 Transit data is public, but it is not always easy to use. A question such as
